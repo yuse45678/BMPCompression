@@ -305,7 +305,7 @@ void LeeJiayi::Compression::DPDecompress(const char* Filepath, const char* Savep
 			fwrite(&infoHeader, sizeof(BitMapInfoHeader), 1, fout);
 
 			if (infoHeader.biBitCount == 8) {
-				fread(&colorMap, sizeof(RGB), 256, fout);
+				fwrite(&colorMap, sizeof(RGB), 256, fout);
 			}
 
 			fwrite(pBmpBuf, p_sum, 1, fout); //写入像素信息
