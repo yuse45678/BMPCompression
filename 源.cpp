@@ -1,34 +1,33 @@
-/**¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨[
-*×÷    Õß£ºLeeJiayi		                                               ¨U
-*µ¥	   Î»£ºSCUT£¬School of Automation Science and Engineering		   ¨U
-* CSDN£ºhttps://blog.csdn.net/weixin_47006220?type=blog				   ¨U
-*¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨g
+/**â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+*ä½œ    è€…ï¼šLeeJiayi		                                               â•‘
+* CSDNï¼šhttps://blog.csdn.net/weixin_47006220?type=blog				   â•‘
+*â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•£
 * Copyright LeeJiayi 2022. All rights reserved.
-*¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨a
+*â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 *----------------------------------------------------------------------*/
 #include"BMPInfo.h"
 #include"Compression.h"
-#include<io.h>	//Ö÷ÒªÓÃÓÚ¶ÔÎÄ¼ş¼ĞÏÂÍ¼Æ¬µÄ¶ÁÈ¡
-#include <direct.h>	//Ö÷ÒªÓÃÓÚ´´½¨ÎÄ¼ş¼Ğ
-#include<time.h>	//Ö÷ÒªÓÃÓÚ¶ÔÑ¹ËõºÍ½âÑ¹ËõµÄ¼ÆÊ±
+#include<io.h>	//ä¸»è¦ç”¨äºå¯¹æ–‡ä»¶å¤¹ä¸‹å›¾ç‰‡çš„è¯»å–
+#include <direct.h>	//ä¸»è¦ç”¨äºåˆ›å»ºæ–‡ä»¶å¤¹
+#include<time.h>	//ä¸»è¦ç”¨äºå¯¹å‹ç¼©å’Œè§£å‹ç¼©çš„è®¡æ—¶
 using namespace LeeJiayi;
 
 /**
- * @brief ±¾º¯ÊıÖ÷ÒªÊÇÓÃÓÚ¶ÁÈ¡ÌØ¶¨Ä¿Â¼ÏÂµÄÌØ¶¨¸ñÊ½ÎÄ¼ş£¬²¢´æ´¢ÆäÂ·¾¶
- * @param path			½«Òª¶ÁÈ¡µÄÄ¿Â¼
- * @param files			ÓÃÓÚ´æ´¢ÎÄ¼şÂ·¾¶µÄ»º´æ
- * @param format		ĞèÒª¶ÁÈ¡µÄÎÄ¼ş¸ñÊ½
+ * @brief æœ¬å‡½æ•°ä¸»è¦æ˜¯ç”¨äºè¯»å–ç‰¹å®šç›®å½•ä¸‹çš„ç‰¹å®šæ ¼å¼æ–‡ä»¶ï¼Œå¹¶å­˜å‚¨å…¶è·¯å¾„
+ * @param path			å°†è¦è¯»å–çš„ç›®å½•
+ * @param files			ç”¨äºå­˜å‚¨æ–‡ä»¶è·¯å¾„çš„ç¼“å­˜
+ * @param format		éœ€è¦è¯»å–çš„æ–‡ä»¶æ ¼å¼
  *
- * @return ¿Õ
+ * @return ç©º
  */
 void GetAllFormatFiles(string path, vector<string>& files, string format)
 {
-	//ÎÄ¼ş¾ä±ú  
+	//æ–‡ä»¶å¥æŸ„  
 	long long  hFile = 0;
-	//_findnext()µÚÒ»¸ö²ÎÊı¡±Â·¾¶¾ä±ú¡±£¬·µ»ØµÄÀàĞÍÎªintptr_t£¨long long£©£¬
-	//Èç¹û¶¨ÒåÎªlong£¬ÔÚwin7ÖĞÊÇÃ»ÓĞÎÊÌâ£¬µ«ÊÇÔÚwin10ÖĞ¾ÍÒª¸ÄÎªlong long»òÕßintptr_t
+	//_findnext()ç¬¬ä¸€ä¸ªå‚æ•°â€è·¯å¾„å¥æŸ„â€ï¼Œè¿”å›çš„ç±»å‹ä¸ºintptr_tï¼ˆlong longï¼‰ï¼Œ
+	//å¦‚æœå®šä¹‰ä¸ºlongï¼Œåœ¨win7ä¸­æ˜¯æ²¡æœ‰é—®é¢˜ï¼Œä½†æ˜¯åœ¨win10ä¸­å°±è¦æ”¹ä¸ºlong longæˆ–è€…intptr_t
 	
-	//ÎÄ¼şĞÅÏ¢  
+	//æ–‡ä»¶ä¿¡æ¯  
 	struct _finddata_t fileinfo;
 	string p;
 	if ((hFile = _findfirst(p.assign(path).append("\\*" + format).c_str(), &fileinfo)) != -1)
@@ -53,82 +52,81 @@ void GetAllFormatFiles(string path, vector<string>& files, string format)
 	}
 }
 
-//³ÌĞòµÄÖ÷Èë¿Ú
+//ç¨‹åºçš„ä¸»å…¥å£
 int main() {
 
-		string prefix = "res";					//resÎÄ¼ş¼ĞÖ÷ÒªÓÃÓÚ´æ´¢½âÑ¹ºóµÄÍ¼Æ¬
-		if (_access(prefix.c_str(), 0) == -1)	//Èç¹ûresÎÄ¼ş¼Ğ²»´æÔÚ
-			_mkdir(prefix.c_str());				//Ôò´´½¨
+		string prefix = "res";					//resæ–‡ä»¶å¤¹ä¸»è¦ç”¨äºå­˜å‚¨è§£å‹åçš„å›¾ç‰‡
+		if (_access(prefix.c_str(), 0) == -1)	//å¦‚æœresæ–‡ä»¶å¤¹ä¸å­˜åœ¨
+			_mkdir(prefix.c_str());				//åˆ™åˆ›å»º
 
-		prefix = "bmp";							//bmpÎÄ¼ş¼ĞÖ÷ÒªÓÃÓÚ´æ´¢Ñ¹ËõÇ°µÄÍ¼Æ¬ÒÔ¼°Ñ¹ËõºóµÄÎÄ¼ş£¡
-		if (_access(prefix.c_str(), 0) == -1)	//Èç¹ûÎÄ¼ş¼Ğ²»´æÔÚ
-			_mkdir(prefix.c_str());				//Ôò´´½¨
+		prefix = "bmp";							//bmpæ–‡ä»¶å¤¹ä¸»è¦ç”¨äºå­˜å‚¨å‹ç¼©å‰çš„å›¾ç‰‡ä»¥åŠå‹ç¼©åçš„æ–‡ä»¶ï¼
+		if (_access(prefix.c_str(), 0) == -1)	//å¦‚æœæ–‡ä»¶å¤¹ä¸å­˜åœ¨
+			_mkdir(prefix.c_str());				//åˆ™åˆ›å»º
 
 		Compression compressor;
 		uint i = 0;
 		string filePath = "bmp";	
 		vector<string> files;
-		clock_t start, finish;   //typedef long clock_t; Ö÷ÒªÓÃÓÚ¼ÆÊ±
+		clock_t start, finish;   //typedef long clock_t; ä¸»è¦ç”¨äºè®¡æ—¶
 		//FILE* stream1;
-		//freopen_s(&stream1, "out.txt", "w", stdout); //Êä³öÖØ¶¨Ïò£¬Êä³öÊı¾İ½«±£´æout.txtÎÄ¼şÖĞ
+		//freopen_s(&stream1, "out.txt", "w", stdout); //è¾“å‡ºé‡å®šå‘ï¼Œè¾“å‡ºæ•°æ®å°†ä¿å­˜out.txtæ–‡ä»¶ä¸­
 
 		cout << "* ---------------------------------------------------------" << endl;
-		cout << "* »¶Ó­Ê¹ÓÃBMPÍ¼ÏñÑ¹ËõÏµÍ³£¬±¾ÏµÍ³¼¯³ÉÁË¶¯Ì¬¹æ»®ºÍLZWÑ¹Ëõ·½·¨£¡" << endl;
-		cout << "* ×÷Õß£ºLeeJiaiyi" << endl;
-		cout << "* µ¥Î»£ºSCUT£¬School of Automation Science and Engineering	" << endl;
+		cout << "* æ¬¢è¿ä½¿ç”¨BMPå›¾åƒå‹ç¼©ç³»ç»Ÿï¼Œæœ¬ç³»ç»Ÿé›†æˆäº†åŠ¨æ€è§„åˆ’å’ŒLZWå‹ç¼©æ–¹æ³•ï¼" << endl;
+		cout << "* ä½œè€…ï¼šLeeJiaiyi" << endl;
 		cout << "* ---------------------------------------------------------" << endl;
 		cout << "* Copyright LeeJiayi 2022. All rights reserved." << endl;
 		cout << "* --------------------------------------------------------- " << endl;
-		cout << "* ×¢Òâ£ºBMPÍ¼Æ¬±ØĞë·ÅÔÚ¿ÉÖ´ĞĞÎÄ¼şÄ¿Â¼ÏÂµÄbmpÎÄ¼ş¼ĞÖĞ£¡" << endl;
+		cout << "* æ³¨æ„ï¼šBMPå›¾ç‰‡å¿…é¡»æ”¾åœ¨å¯æ‰§è¡Œæ–‡ä»¶ç›®å½•ä¸‹çš„bmpæ–‡ä»¶å¤¹ä¸­ï¼" << endl;
 
 		string format = ".bmp";
-		//¶ÁÈ¡bmpÎÄ¼ş¼ĞÏÂµÄbmpÎÄ¼ş
+		//è¯»å–bmpæ–‡ä»¶å¤¹ä¸‹çš„bmpæ–‡ä»¶
 		GetAllFormatFiles(filePath, files, format);
-		//Èç¹û´æÔÚÎÄ¼ş¾ÍÖ´ĞĞÈÎÎñ
+		//å¦‚æœå­˜åœ¨æ–‡ä»¶å°±æ‰§è¡Œä»»åŠ¡
 		if (files.size()) {
-			cout << endl << "* ÇëÑ¡Ôñµ±Ç°ÈÎÎñ..." << endl;
-			cout << "* 1.LZWÑ¹ËõÍ¼Æ¬		* 2.¶¯Ì¬¹æ»®Ñ¹ËõÍ¼Æ¬		* 3.½áÊø³ÌĞò" << endl;
+			cout << endl << "* è¯·é€‰æ‹©å½“å‰ä»»åŠ¡..." << endl;
+			cout << "* 1.LZWå‹ç¼©å›¾ç‰‡		* 2.åŠ¨æ€è§„åˆ’å‹ç¼©å›¾ç‰‡		* 3.ç»“æŸç¨‹åº" << endl;
 			cout << "* --------------------------------------------------------- " << endl;
 			cin >> i;
 			if (i == 1) {
 				cout <<endl<< "* --------------------------------------------------------- " << endl;
-				cout << "¿ªÊ¼ÅúÁ¿LZWÑ¹Ëõ..." << endl;
+				cout << "å¼€å§‹æ‰¹é‡LZWå‹ç¼©..." << endl;
 				for (int iter = 0; iter < files.size(); iter++) {
 					string infile = files[iter];
 					string outfile = infile + ".lzw";
-					start = clock();												//¿ªÊ¼¼ÆÊ±
-					compressor.LzwCompress(infile.c_str(), outfile.c_str());		//LZWÑ¹Ëõ
-					finish = clock();												//½áÊø¼ÆÊ±
-					double totaltime = (double)(finish - start) / CLOCKS_PER_SEC;	//¼ÆËãÊ±¼ä
-					cout << "Ñ¹ËõÊ±¼äÎª" << totaltime << "Ãë£¡" << endl;			//Êä³öÊ±¼ä
+					start = clock();												//å¼€å§‹è®¡æ—¶
+					compressor.LzwCompress(infile.c_str(), outfile.c_str());		//LZWå‹ç¼©
+					finish = clock();												//ç»“æŸè®¡æ—¶
+					double totaltime = (double)(finish - start) / CLOCKS_PER_SEC;	//è®¡ç®—æ—¶é—´
+					cout << "å‹ç¼©æ—¶é—´ä¸º" << totaltime << "ç§’ï¼" << endl;			//è¾“å‡ºæ—¶é—´
 					cout << "* --------------------------------------------------------- " << endl;
 				}
 				for (int iter = 0; iter < files.size(); iter++) {
 					string infile = files[iter] + ".lzw";
-					//·ÖÀë×Ö·û´®£¬½«ÎÄ¼şÃûÌáÈ¡³öÀ´
+					//åˆ†ç¦»å­—ç¬¦ä¸²ï¼Œå°†æ–‡ä»¶åæå–å‡ºæ¥
 					vector<string> s = splitStr(files[iter], "\\");
 					s = splitStr(s[1], ".");
 					string outfile = "res//LZWDecompress_"+s[0] + ".bmp";
 					cout << endl << "* --------------------------------------------------------- " << endl
-						<< "¿ªÊ¼½âÑ¹Ëõ...." << endl;
-					start = clock();												//¿ªÊ¼¼ÆÊ±
-					compressor.LzwDecompress(infile.c_str(), outfile.c_str());		//LZW½âÑ¹Ëõ
-					finish = clock();												//½áÊø¼ÆÊ±
-					double totaltime = (double)(finish - start) / CLOCKS_PER_SEC;	//¼ÆËãÊ±¼ä
-					cout << "½âÑ¹ËõÊ±¼äÎª" << totaltime << "Ãë£¡" << endl;			//Êä³öÊ±¼ä
+						<< "å¼€å§‹è§£å‹ç¼©...." << endl;
+					start = clock();												//å¼€å§‹è®¡æ—¶
+					compressor.LzwDecompress(infile.c_str(), outfile.c_str());		//LZWè§£å‹ç¼©
+					finish = clock();												//ç»“æŸè®¡æ—¶
+					double totaltime = (double)(finish - start) / CLOCKS_PER_SEC;	//è®¡ç®—æ—¶é—´
+					cout << "è§£å‹ç¼©æ—¶é—´ä¸º" << totaltime << "ç§’ï¼" << endl;			//è¾“å‡ºæ—¶é—´
 				}
 			}
 			else if (i == 2) {
 				cout << "* --------------------------------------------------------- " << endl;
-				cout << "¿ªÊ¼ÅúÁ¿¶¯Ì¬¹æ»®Ñ¹Ëõ..." << endl;
+				cout << "å¼€å§‹æ‰¹é‡åŠ¨æ€è§„åˆ’å‹ç¼©..." << endl;
 				for (int iter = 0; iter < files.size(); iter++) {
 					string infile = files[iter];
 					string outfile = infile + ".dp";
-					start = clock();												//¿ªÊ¼¼ÆÊ±
-					compressor.DPCompress(infile.c_str(), outfile.c_str());			//DPÑ¹Ëõ
-					finish = clock();												//½áÊø¼ÆÊ±
-					double totaltime = (double)(finish - start) / CLOCKS_PER_SEC;	//¼ÆËãÊ±¼ä
-					cout << "Ñ¹ËõÊ±¼äÎª" << totaltime << "Ãë£¡" << endl;			//Êä³öÊ±¼ä
+					start = clock();												//å¼€å§‹è®¡æ—¶
+					compressor.DPCompress(infile.c_str(), outfile.c_str());			//DPå‹ç¼©
+					finish = clock();												//ç»“æŸè®¡æ—¶
+					double totaltime = (double)(finish - start) / CLOCKS_PER_SEC;	//è®¡ç®—æ—¶é—´
+					cout << "å‹ç¼©æ—¶é—´ä¸º" << totaltime << "ç§’ï¼" << endl;			//è¾“å‡ºæ—¶é—´
 					cout << "* --------------------------------------------------------- " << endl;
 				}
 				for (int iter = 0; iter < files.size(); iter++) {
@@ -137,19 +135,19 @@ int main() {
 					s = splitStr(s[1], ".");
 					string outfile = "res//DPDecompress_" + s[0] + ".bmp";
 					cout << endl << "* --------------------------------------------------------- " << endl
-						<< "¿ªÊ¼½âÑ¹Ëõ...." << endl;
-					start = clock();												//¿ªÊ¼¼ÆÊ±
-					compressor.DPDecompress(infile.c_str(), outfile.c_str());		//DP½âÑ¹Ëõ
-					finish = clock();												//½áÊø¼ÆÊ±
-					double totaltime = (double)(finish - start) / CLOCKS_PER_SEC;	//¼ÆËãÊ±¼ä
-					cout << "½âÑ¹ËõÊ±¼äÎª" << totaltime << "Ãë£¡" << endl;			//Êä³öÊ±¼ä
+						<< "å¼€å§‹è§£å‹ç¼©...." << endl;
+					start = clock();												//å¼€å§‹è®¡æ—¶
+					compressor.DPDecompress(infile.c_str(), outfile.c_str());		//DPè§£å‹ç¼©
+					finish = clock();												//ç»“æŸè®¡æ—¶
+					double totaltime = (double)(finish - start) / CLOCKS_PER_SEC;	//è®¡ç®—æ—¶é—´
+					cout << "è§£å‹ç¼©æ—¶é—´ä¸º" << totaltime << "ç§’ï¼" << endl;			//è¾“å‡ºæ—¶é—´
 				}
 			}
 
 		
 		}
 		else {
-			cout << "bmpÎÄ¼ş¼ĞÏÂÎŞbmpÍ¼Æ¬£¡Çë¼ì²é£¡"<<endl;
+			cout << "bmpæ–‡ä»¶å¤¹ä¸‹æ— bmpå›¾ç‰‡ï¼è¯·æ£€æŸ¥ï¼"<<endl;
 			
 		}
 		//fclose(stdout);
