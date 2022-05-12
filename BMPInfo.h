@@ -1,12 +1,11 @@
-/**¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨[
-*×÷    Õß£ºLeeJiayi		                                               ¨U
-*µ¥	   Î»£ºSCUT£¬School of Automation Science and Engineering		   ¨U
-* CSDN£ºhttps://blog.csdn.net/weixin_47006220?type=blog				   ¨U
-*¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨g
+/**â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+*ä½œ    è€…ï¼šLeeJiayi		                                               â•‘
+* CSDNï¼šhttps://blog.csdn.net/weixin_47006220?type=blog				   â•‘
+*â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•£
 * Copyright LeeJiayi 2022. All rights reserved.
-*¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨a
+*â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 *----------------------------------------------------------------------*/
-#pragma pack(1) //Õâ¸ö·Ç³£ÖØÒª£¡±íÊ¾½á¹¹Ìå°´ÕÕ1¸ö×Ö½ÚÀ´¹¹½¨£¡£¡£¡£¡£¡£¡£¡£¡£¡
+#pragma pack(1) //è¿™ä¸ªéå¸¸é‡è¦ï¼è¡¨ç¤ºç»“æ„ä½“æŒ‰ç…§1ä¸ªå­—èŠ‚æ¥æ„å»ºï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
 #ifndef BMPINFO_H
 #define BMPINFO_H
 #define BMPHEADSIZE 14
@@ -22,31 +21,31 @@ using namespace cv;
 using namespace std;
 namespace LeeJiayi {
 
-	typedef struct tagBITMAPFILEHEADER//BMPÎÄ¼şÍ·(14×Ö½Ú)
+	typedef struct tagBITMAPFILEHEADER//BMPæ–‡ä»¶å¤´(14å­—èŠ‚)
 	{
-		unsigned short bfType; // Î»Í¼ÎÄ¼şµÄÀàĞÍ£¬±ØĞëÎªBM(0-1×Ö½Ú)
-		unsigned int bfSize; // Î»Í¼ÎÄ¼şµÄ´óĞ¡£¬ÒÔ×Ö½ÚÎªµ¥Î»(2-5×Ö½Ú)
-		unsigned short bfReserved1; // Î»Í¼ÎÄ¼ş±£Áô×Ö£¬±ØĞëÎª0(6-7×Ö½Ú)
-		unsigned short bfReserved2; // Î»Í¼ÎÄ¼ş±£Áô×Ö£¬±ØĞëÎª0(8-9×Ö½Ú)
-		unsigned int bfOffBits; // Î»Í¼Êı¾İµÄÆğÊ¼Î»ÖÃ£¬ÒÔÏà¶ÔÓÚÎ»Í¼(10-13×Ö½Ú)
-						 // ÎÄ¼şÍ·µÄÆ«ÒÆÁ¿±íÊ¾£¬ÒÔ×Ö½ÚÎªµ¥Î»
+		unsigned short bfType; // ä½å›¾æ–‡ä»¶çš„ç±»å‹ï¼Œå¿…é¡»ä¸ºBM(0-1å­—èŠ‚)
+		unsigned int bfSize; // ä½å›¾æ–‡ä»¶çš„å¤§å°ï¼Œä»¥å­—èŠ‚ä¸ºå•ä½(2-5å­—èŠ‚)
+		unsigned short bfReserved1; // ä½å›¾æ–‡ä»¶ä¿ç•™å­—ï¼Œå¿…é¡»ä¸º0(6-7å­—èŠ‚)
+		unsigned short bfReserved2; // ä½å›¾æ–‡ä»¶ä¿ç•™å­—ï¼Œå¿…é¡»ä¸º0(8-9å­—èŠ‚)
+		unsigned int bfOffBits; // ä½å›¾æ•°æ®çš„èµ·å§‹ä½ç½®ï¼Œä»¥ç›¸å¯¹äºä½å›¾(10-13å­—èŠ‚)
+						 // æ–‡ä»¶å¤´çš„åç§»é‡è¡¨ç¤ºï¼Œä»¥å­—èŠ‚ä¸ºå•ä½
 	} BitMapFileHeader;
 
-	typedef struct tagBITMAPINFOHEADER  //Î»Í¼ĞÅÏ¢Í·(40×Ö½Ú)
+	typedef struct tagBITMAPINFOHEADER  //ä½å›¾ä¿¡æ¯å¤´(40å­—èŠ‚)
 	{
-		unsigned int biSize; // ±¾½á¹¹ËùÕ¼ÓÃ×Ö½ÚÊı(14-17×Ö½Ú)
-		unsigned int biWidth; // Î»Í¼µÄ¿í¶È£¬ÒÔÏñËØÎªµ¥Î»(18-21×Ö½Ú)
-		unsigned int biHeight; // Î»Í¼µÄ¸ß¶È£¬ÒÔÏñËØÎªµ¥Î»(22-25×Ö½Ú)
-		unsigned short biPlanes; // Ä¿±êÉè±¸µÄ¼¶±ğ£¬±ØĞëÎª1(26-27×Ö½Ú)
-		unsigned short biBitCount;// Ã¿¸öÏñËØËùĞèµÄÎ»Êı£¬±ØĞëÊÇ1(Ë«É«),(28-29×Ö½Ú)
-						// 4(16É«)£¬8(256É«)»ò24(Õæ²ÊÉ«)Ö®Ò»
-		unsigned int biCompression; // Î»Í¼Ñ¹ËõÀàĞÍ£¬±ØĞëÊÇ 0(²»Ñ¹Ëõ),(30-33×Ö½Ú)
-							 // 1(BI_RLE8Ñ¹ËõÀàĞÍ)»ò2(BI_RLE4Ñ¹ËõÀàĞÍ)Ö®Ò»
-		unsigned int biSizeImage; // Î»Í¼µÄ´óĞ¡£¬ÒÔ×Ö½ÚÎªµ¥Î»(34-37×Ö½Ú)
-		unsigned int biXPelsPerMeter; // Î»Í¼Ë®Æ½·Ö±æÂÊ£¬Ã¿Ã×ÏñËØÊı(38-41×Ö½Ú)
-		unsigned int biYPelsPerMeter; // Î»Í¼´¹Ö±·Ö±æÂÊ£¬Ã¿Ã×ÏñËØÊı(42-45×Ö½Ú)
-		unsigned int biClrUsed;// Î»Í¼Êµ¼ÊÊ¹ÓÃµÄÑÕÉ«±íÖĞµÄÑÕÉ«Êı(46-49×Ö½Ú)
-		unsigned int biClrImportant;// Î»Í¼ÏÔÊ¾¹ı³ÌÖĞÖØÒªµÄÑÕÉ«Êı(50-53×Ö½Ú)
+		unsigned int biSize; // æœ¬ç»“æ„æ‰€å ç”¨å­—èŠ‚æ•°(14-17å­—èŠ‚)
+		unsigned int biWidth; // ä½å›¾çš„å®½åº¦ï¼Œä»¥åƒç´ ä¸ºå•ä½(18-21å­—èŠ‚)
+		unsigned int biHeight; // ä½å›¾çš„é«˜åº¦ï¼Œä»¥åƒç´ ä¸ºå•ä½(22-25å­—èŠ‚)
+		unsigned short biPlanes; // ç›®æ ‡è®¾å¤‡çš„çº§åˆ«ï¼Œå¿…é¡»ä¸º1(26-27å­—èŠ‚)
+		unsigned short biBitCount;// æ¯ä¸ªåƒç´ æ‰€éœ€çš„ä½æ•°ï¼Œå¿…é¡»æ˜¯1(åŒè‰²),(28-29å­—èŠ‚)
+						// 4(16è‰²)ï¼Œ8(256è‰²)æˆ–24(çœŸå½©è‰²)ä¹‹ä¸€
+		unsigned int biCompression; // ä½å›¾å‹ç¼©ç±»å‹ï¼Œå¿…é¡»æ˜¯ 0(ä¸å‹ç¼©),(30-33å­—èŠ‚)
+							 // 1(BI_RLE8å‹ç¼©ç±»å‹)æˆ–2(BI_RLE4å‹ç¼©ç±»å‹)ä¹‹ä¸€
+		unsigned int biSizeImage; // ä½å›¾çš„å¤§å°ï¼Œä»¥å­—èŠ‚ä¸ºå•ä½(34-37å­—èŠ‚)
+		unsigned int biXPelsPerMeter; // ä½å›¾æ°´å¹³åˆ†è¾¨ç‡ï¼Œæ¯ç±³åƒç´ æ•°(38-41å­—èŠ‚)
+		unsigned int biYPelsPerMeter; // ä½å›¾å‚ç›´åˆ†è¾¨ç‡ï¼Œæ¯ç±³åƒç´ æ•°(42-45å­—èŠ‚)
+		unsigned int biClrUsed;// ä½å›¾å®é™…ä½¿ç”¨çš„é¢œè‰²è¡¨ä¸­çš„é¢œè‰²æ•°(46-49å­—èŠ‚)
+		unsigned int biClrImportant;// ä½å›¾æ˜¾ç¤ºè¿‡ç¨‹ä¸­é‡è¦çš„é¢œè‰²æ•°(50-53å­—èŠ‚)
 	} BitMapInfoHeader;
 
 	typedef struct tagRGBQUAD {
@@ -56,7 +55,7 @@ namespace LeeJiayi {
 		unsigned char rgbReserved;
 	}RGB;
 
-	//ÓÃÓÚ²âÊÔ¶ÁÈ¡BMPÍ¼Æ¬µÄÀà
+	//ç”¨äºæµ‹è¯•è¯»å–BMPå›¾ç‰‡çš„ç±»
 	class ImgBMP
 	{
 	public:
@@ -127,7 +126,7 @@ bool ImgBMP::LoadImage(const char* path)
 		return true;
 	}
 	else {
-		cout << "´ò¿ªÎÄ¼ş´íÎóàÏ£¡£¡" << endl;
+		cout << "æ‰“å¼€æ–‡ä»¶é”™è¯¯å˜ï¼ï¼" << endl;
 		return false;
 	}
 }
@@ -181,7 +180,7 @@ bool ImgBMP::SaveImage(const char* path)
 		return true;
 	}
 	else {
-		cout << "Êä³öÎÄ¼ş´ò¿ª´íÎóàÏ£¡" << endl;
+		cout << "è¾“å‡ºæ–‡ä»¶æ‰“å¼€é”™è¯¯å˜ï¼" << endl;
 		return false;
 	}
 
