@@ -1,0 +1,2 @@
+# BMPCompression
+基于LZW和动态规划两种方法的BMP图像压缩
