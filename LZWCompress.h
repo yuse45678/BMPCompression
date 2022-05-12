@@ -1,8 +1,7 @@
-/**¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨[
-*×÷    Õß£ºLeeJiayi		                                               ¨U
-*µ¥	   Î»£ºSCUT£¬School of Automation Science and Engineering		   ¨U
-* CSDN£ºhttps://blog.csdn.net/weixin_47006220?type=blog				   ¨U
-*¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨a
+/**â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+*ä½œ    è€…ï¼šLeeJiayi		                                               â•‘
+* CSDNï¼šhttps://blog.csdn.net/weixin_47006220?type=blog				   â•‘
+*â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 */
 
 #pragma once
@@ -34,7 +33,7 @@ private:
 
 public:
 	LZWcompress(vector<uchar> data, int size);
-
+	LZWcompress();
 	void encode_init();
 	void decode_init();
 	void LZW_encode();
