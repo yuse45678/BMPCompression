@@ -1,98 +1,97 @@
-/**¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨[
-*×÷    Õß£ºLeeJiayi		                                               ¨U
-*µ¥	   Î»£ºSCUT£¬School of Automation Science and Engineering		   ¨U
-* CSDN£ºhttps://blog.csdn.net/weixin_47006220?type=blog				   ¨U
-*¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨g
+/**â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+*ä½œ    è€…ï¼šLeeJiayi		                                               â•‘
+* CSDNï¼šhttps://blog.csdn.net/weixin_47006220?type=blog				   â•‘
+*â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•£
 * Copyright LeeJiayi 2022. All rights reserved.
-*¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨a
+*â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 *----------------------------------------------------------------------*/
 #include "Compression.h"
 
 /**
- * @brief LZWÑ¹Ëõ¹ı³Ì
- * @param Filepath		ĞèÒªÑ¹ËõµÄÎÄ¼şÂ·¾¶
- * @param Savepath		Ñ¹ËõºóÎÄ¼ş´æ´¢Â·¾¶
+ * @brief LZWå‹ç¼©è¿‡ç¨‹
+ * @param Filepath		éœ€è¦å‹ç¼©çš„æ–‡ä»¶è·¯å¾„
+ * @param Savepath		å‹ç¼©åæ–‡ä»¶å­˜å‚¨è·¯å¾„
  *
- * @return ¿Õ
+ * @return ç©º
  */
 void LeeJiayi::Compression::LzwCompress(const char* Filepath, const char* Savepath)
 {
-	BitMapFileHeader bmpFileHeaderData;	//BMPÎÄ¼şÍ·
-	BitMapInfoHeader bmpInfoHeaderData;	//BMPĞÅÏ¢Í·
-	RGB colorMap[256];					//BMPÑÕÉ«±í£¨Èç¹ûÊÇ24Î»Õæ²ÊÉ«²»´æÔÚÕâÍæÒâ£©
+	BitMapFileHeader bmpFileHeaderData;	//BMPæ–‡ä»¶å¤´
+	BitMapInfoHeader bmpInfoHeaderData;	//BMPä¿¡æ¯å¤´
+	RGB colorMap[256];					//BMPé¢œè‰²è¡¨ï¼ˆå¦‚æœæ˜¯24ä½çœŸå½©è‰²ä¸å­˜åœ¨è¿™ç©æ„ï¼‰
 	vector<uchar> imgData;
 	int channels = 0;
 	FILE* inFile;
 	errno_t err = fopen_s(&inFile, Filepath, "rb");
 	if (err == 0) {
-		cout << "ÒÑ¼ÓÔØ" << Filepath << endl;
-		cout << "¿ªÊ¼¶ÁÈ¡Í¼ÏñÊı¾İ" << endl;
+		cout << "å·²åŠ è½½" << Filepath << endl;
+		cout << "å¼€å§‹è¯»å–å›¾åƒæ•°æ®" << endl;
 		fread(&bmpFileHeaderData, sizeof(BitMapFileHeader), 1, inFile);
 		fread(&bmpInfoHeaderData, sizeof(BitMapInfoHeader), 1, inFile);
 		
-		//Èç¹ûÊÇ8Î»Î»Í¼¾Í¶ÁÈ¡ÑÕÉ«±í
-		//±¾´ÎÈÎÎñµÄÍ¼Æ¬¶¼ÊÇ8Î»Î»Í¼
+		//å¦‚æœæ˜¯8ä½ä½å›¾å°±è¯»å–é¢œè‰²è¡¨
+		//æœ¬æ¬¡ä»»åŠ¡çš„å›¾ç‰‡éƒ½æ˜¯8ä½ä½å›¾
 		if (bmpInfoHeaderData.biBitCount == 8) {
 			fread(&colorMap, sizeof(RGB), 256, inFile);
 		}
 
-		uchar pixVal;//ÓÃÓÚÁÙÊ±´æ´¢¶ÁÈ¡µÄÏñËØĞÅÏ¢
+		uchar pixVal;//ç”¨äºä¸´æ—¶å­˜å‚¨è¯»å–çš„åƒç´ ä¿¡æ¯
 		int imgSize = bmpInfoHeaderData.biHeight * bmpInfoHeaderData.biWidth * bmpInfoHeaderData.biBitCount / 8;
-		//¶ÁÈ¡ÏñËØĞÅÏ¢²¢´æ´¢ÔÚimgDataÖĞ
+		//è¯»å–åƒç´ ä¿¡æ¯å¹¶å­˜å‚¨åœ¨imgDataä¸­
 		for (int i = 0; i < imgSize; i++) {
 			fread(&pixVal, sizeof(uchar), 1, inFile);
 			imgData.push_back(pixVal);
 			}
-		//¼ÆËãÍ¼ÏñÎÄ¼şµÄ´óĞ¡£¬ÓÃÓÚºóĞøÑ¹Ëõ±ÈµÄ¼ÆËã£¡
+		//è®¡ç®—å›¾åƒæ–‡ä»¶çš„å¤§å°ï¼Œç”¨äºåç»­å‹ç¼©æ¯”çš„è®¡ç®—ï¼
 		float inFileSize = ftell(inFile);
 		fclose(inFile);
-		//¶¨ÒåLZWÑ¹ËõÀà
+		//å®šä¹‰LZWå‹ç¼©ç±»
 		LZWcompress lzw(imgData, imgData.size());
-		//LZW±àÂë
+		//LZWç¼–ç 
 		lzw.LZW_encode();
 		int dataSize=0;
-		//»ñÈ¡LZW±àÂëºóµÄÊı¾İ
+		//è·å–LZWç¼–ç åçš„æ•°æ®
 		uchar* lzwData=lzw.get_lzw_encode(dataSize);
 		
-		cout << "¿ªÊ¼½øĞĞÑ¹ËõÎÄ¼şµÄĞ´Èë...." << endl;
+		cout << "å¼€å§‹è¿›è¡Œå‹ç¼©æ–‡ä»¶çš„å†™å…¥...." << endl;
 		FILE* fout;
 
 		errno_t err = fopen_s(&fout, Savepath, "wb");
 		if (!err) {
-			//Ğ´ÈëÎÄ¼şÍ·
+			//å†™å…¥æ–‡ä»¶å¤´
 			fwrite(&bmpFileHeaderData, sizeof(bmpFileHeaderData), 1, fout);
-			//Ğ´ÈëĞÅÏ¢Í·
+			//å†™å…¥ä¿¡æ¯å¤´
 			fwrite(&bmpInfoHeaderData, sizeof(bmpInfoHeaderData), 1, fout);
-			//8Î»Î»Í¼¾ÍĞ´ÈëÑÕÉ«±í
+			//8ä½ä½å›¾å°±å†™å…¥é¢œè‰²è¡¨
 			if (bmpInfoHeaderData.biBitCount == 8) {
 				fwrite(&colorMap, sizeof(RGB), 256, fout);
 			}
-			//Ğ´ÈëÑ¹ËõºóµÄÏñËØÊı¾İ
+			//å†™å…¥å‹ç¼©åçš„åƒç´ æ•°æ®
 			fwrite(lzwData,dataSize,1,fout);
-			//¼ÆËãÑ¹ËõºóµÄÎÄ¼ş´óĞ¡
+			//è®¡ç®—å‹ç¼©åçš„æ–‡ä»¶å¤§å°
 			float FileSize = ftell(fout);
 			fclose(fout);
 
-			cout << "ÒÑÍê³É¶Ô"<<Savepath <<"µÄĞ´Èë£¡" << endl;
+			cout << "å·²å®Œæˆå¯¹"<<Savepath <<"çš„å†™å…¥ï¼" << endl;
 			cout << "* ---------------------------------------------------------" << endl;
-			cout << Filepath<<"µÄÑ¹Ëõ±ÈÎª" << FileSize / inFileSize << endl;;
+			cout << Filepath<<"çš„å‹ç¼©æ¯”ä¸º" << FileSize / inFileSize << endl;;
 			cout << "* ---------------------------------------------------------" << endl;
 		}
 		else {
-			cout << "ÎŞ·¨´ò¿ª½«ÒªĞ´ÈëµÄÎÄ¼ş£¡Çë¼ì²éÎÄ¼şÂ·¾¶£¡£¡" << endl;
+			cout << "æ— æ³•æ‰“å¼€å°†è¦å†™å…¥çš„æ–‡ä»¶ï¼è¯·æ£€æŸ¥æ–‡ä»¶è·¯å¾„ï¼ï¼" << endl;
 		}
 	}
 	else {
-		cout << "ÎŞ·¨´ò¿ªÍ¼ÏñÎÄ¼ş£¡Çë¼ì²éÎÄ¼şÂ·¾¶£¡£¡" << endl;
+		cout << "æ— æ³•æ‰“å¼€å›¾åƒæ–‡ä»¶ï¼è¯·æ£€æŸ¥æ–‡ä»¶è·¯å¾„ï¼ï¼" << endl;
 	}
 }
 
 /**
- * @brief LZW½âÑ¹Ëõ¹ı³Ì
- * @param Filepath		ĞèÒª½âÑ¹ËõµÄÎÄ¼şÂ·¾¶
- * @param Savepath		½âÑ¹ËõºóÎÄ¼ş´æ´¢Â·¾¶
+ * @brief LZWè§£å‹ç¼©è¿‡ç¨‹
+ * @param Filepath		éœ€è¦è§£å‹ç¼©çš„æ–‡ä»¶è·¯å¾„
+ * @param Savepath		è§£å‹ç¼©åæ–‡ä»¶å­˜å‚¨è·¯å¾„
  *
- * @return ¿Õ
+ * @return ç©º
  */
 void LeeJiayi::Compression::LzwDecompress(const char* Filepath, const char* Savepath)
 {
@@ -102,8 +101,8 @@ void LeeJiayi::Compression::LzwDecompress(const char* Filepath, const char* Save
 	FILE* inFile;
 	errno_t err = fopen_s(&inFile, Filepath, "rb");
 	if (!err) {
-		cout << "¿ªÊ¼¶ÁÈ¡ "<<Filepath<<" Ñ¹ËõÎÄ¼şÊı¾İ" << endl;
-		//»ñÈ¡ Î»Í¼ĞÅÏ¢ ÖĞµÄÍ¼Ïñ¿í¶È ¸ß¶È ºÍ Î»Éî¶È
+		cout << "å¼€å§‹è¯»å– "<<Filepath<<" å‹ç¼©æ–‡ä»¶æ•°æ®" << endl;
+		//è·å– ä½å›¾ä¿¡æ¯ ä¸­çš„å›¾åƒå®½åº¦ é«˜åº¦ å’Œ ä½æ·±åº¦
 		fread(&fileHeader, sizeof(BitMapFileHeader), 1, inFile);
 		fread(&infoHeader, sizeof(BitMapInfoHeader), 1, inFile);
 
@@ -114,7 +113,7 @@ void LeeJiayi::Compression::LzwDecompress(const char* Filepath, const char* Save
 		uchar* lzwSizeInfo = new uchar[4];
 		fread(lzwSizeInfo, sizeof(uchar), 4, inFile);
 
-		cout << "¿ªÊ¼»¹Ô­ĞÅÏ¢.." << endl;
+		cout << "å¼€å§‹è¿˜åŸä¿¡æ¯.." << endl;
 		uint encode_size;
 		string encodeSizeStr = "";
 		for (int i = 0; i < 4; i++) {
@@ -134,7 +133,7 @@ void LeeJiayi::Compression::LzwDecompress(const char* Filepath, const char* Save
 		FILE* fout;
 		err = fopen_s(&fout, Savepath, "wb");
 		if (!err) {
-			cout << "¿ªÊ¼Ğ´ÈëÍ¼ÏñÊı¾İ" << endl;
+			cout << "å¼€å§‹å†™å…¥å›¾åƒæ•°æ®" << endl;
 			fwrite(&fileHeader, sizeof(BitMapFileHeader), 1, fout);
 			fwrite(&infoHeader, sizeof(BitMapInfoHeader), 1, fout);
 
@@ -145,72 +144,72 @@ void LeeJiayi::Compression::LzwDecompress(const char* Filepath, const char* Save
 			fwrite(data, dataSize, 1, fout);
 			fclose(fout);
 	
-			cout << "ÒÑÍê³É¶Ô"<<Savepath<<"µÄĞ´Èë£¡"<< endl;
+			cout << "å·²å®Œæˆå¯¹"<<Savepath<<"çš„å†™å…¥ï¼"<< endl;
 			cout << "* ---------------------------------------------------------" << endl;
 		}
 		else {
-			cout << "ÎŞ·¨´ò¿ª½«ÒªĞ´ÈëµÄÎÄ¼ş£¡Çë¼ì²éÎÄ¼şÂ·¾¶£¡£¡" << endl;
+			cout << "æ— æ³•æ‰“å¼€å°†è¦å†™å…¥çš„æ–‡ä»¶ï¼è¯·æ£€æŸ¥æ–‡ä»¶è·¯å¾„ï¼ï¼" << endl;
 		}
 	}
 	else {
-		cout << "ÎŞ·¨´ò¿ª½«Òª½âÑ¹µÄÎÄ¼ş£¡Çë¼ì²éÎÄ¼şÂ·¾¶£¡£¡" << endl;
+		cout << "æ— æ³•æ‰“å¼€å°†è¦è§£å‹çš„æ–‡ä»¶ï¼è¯·æ£€æŸ¥æ–‡ä»¶è·¯å¾„ï¼ï¼" << endl;
 	}
 }
 
 /**
- * @brief DPÑ¹Ëõ¹ı³Ì
- * @param Filepath		ĞèÒªÑ¹ËõµÄÎÄ¼şÂ·¾¶
- * @param Savepath		Ñ¹ËõºóÎÄ¼ş´æ´¢Â·¾¶
+ * @brief DPå‹ç¼©è¿‡ç¨‹
+ * @param Filepath		éœ€è¦å‹ç¼©çš„æ–‡ä»¶è·¯å¾„
+ * @param Savepath		å‹ç¼©åæ–‡ä»¶å­˜å‚¨è·¯å¾„
  *
- * @return ¿Õ
+ * @return ç©º
  */
 void LeeJiayi::Compression::DPCompress(const char* Filepath, const char* Savepath)
 {
-	BitMapFileHeader bmpFileHeaderData;	//BMPÎÄ¼şÍ·
-	BitMapInfoHeader bmpInfoHeaderData;	//BMPĞÅÏ¢Í·
-	RGB colorMap[256];					//BMPÑÕÉ«±í£¨Èç¹ûÊÇ24Î»Õæ²ÊÉ«²»´æÔÚÕâÍæÒâ£©
+	BitMapFileHeader bmpFileHeaderData;	//BMPæ–‡ä»¶å¤´
+	BitMapInfoHeader bmpInfoHeaderData;	//BMPä¿¡æ¯å¤´
+	RGB colorMap[256];					//BMPé¢œè‰²è¡¨ï¼ˆå¦‚æœæ˜¯24ä½çœŸå½©è‰²ä¸å­˜åœ¨è¿™ç©æ„ï¼‰
 	vector<uchar> imgData;
 	int channels = 0;
 	FILE* inFile;
 	errno_t err = fopen_s(&inFile, Filepath, "rb");
 	if (err == 0) {
-		cout << "¿ªÊ¼¶ÁÈ¡"<< Filepath<<"Í¼ÏñÊı¾İ" << endl;
+		cout << "å¼€å§‹è¯»å–"<< Filepath<<"å›¾åƒæ•°æ®" << endl;
 		fread(&bmpFileHeaderData, sizeof(BitMapFileHeader), 1, inFile);
 		fread(&bmpInfoHeaderData, sizeof(BitMapInfoHeader), 1, inFile);
 
-		//Èç¹ûÊÇ8Î»Î»Í¼¾Í¶ÁÈ¡ÑÕÉ«±í
-		//±¾´ÎÈÎÎñµÄÍ¼Æ¬¶¼ÊÇ8Î»Î»Í¼
+		//å¦‚æœæ˜¯8ä½ä½å›¾å°±è¯»å–é¢œè‰²è¡¨
+		//æœ¬æ¬¡ä»»åŠ¡çš„å›¾ç‰‡éƒ½æ˜¯8ä½ä½å›¾
 		if (bmpInfoHeaderData.biBitCount == 8) {
 			fread(&colorMap, sizeof(RGB), 256, inFile);
 		}
 
 
-		uchar pixVal;//ÓÃÓÚÁÙÊ±´æ´¢¶ÁÈ¡µÄÏñËØĞÅÏ¢
+		uchar pixVal;//ç”¨äºä¸´æ—¶å­˜å‚¨è¯»å–çš„åƒç´ ä¿¡æ¯
 		int imgSize = bmpInfoHeaderData.biHeight * bmpInfoHeaderData.biWidth * bmpInfoHeaderData.biBitCount / 8;
 		
-		//¶ÁÈ¡ÏñËØĞÅÏ¢
+		//è¯»å–åƒç´ ä¿¡æ¯
 		for (int i = 0; i < imgSize; i++) {
 			fread(&pixVal, sizeof(uchar), 1, inFile);
 			imgData.push_back(pixVal);
 		}
 
 
-		//¶¯Ì¬¹æ»®¼ÆËã³ö·Ö¶ÎĞÅÏ¢¼°ÆäËùÊ¹ÓÃµÄÎ»Êı
+		//åŠ¨æ€è§„åˆ’è®¡ç®—å‡ºåˆ†æ®µä¿¡æ¯åŠå…¶æ‰€ä½¿ç”¨çš„ä½æ•°
 		vector<int> segment;
 		vector<int> segmentBit;
 		int SegmentCount = GetSegmentation(imgData.size(), imgData, segment, segmentBit);
 
-		cout << "¿ªÊ¼½øĞĞÑ¹ËõÎÄ¼şµÄĞ´Èë...." << endl;
+		cout << "å¼€å§‹è¿›è¡Œå‹ç¼©æ–‡ä»¶çš„å†™å…¥...." << endl;
 
-		//32Î»ÊÇÃèÊöÓĞ¶àÉÙ¶Î£¨¼´SegmentCount£©;
-		//SegmentCount*11ÊÇÓĞSegmentCount¶Î£¬Ã¿¶ÎµÄ8Î»ÓÃÀ´ÃèÊö¶ÎµÄ³¤¶È£¬3Î»ÓÃÀ´ÃèÊöÏñËØÎ»Êı
+		//32ä½æ˜¯æè¿°æœ‰å¤šå°‘æ®µï¼ˆå³SegmentCountï¼‰;
+		//SegmentCount*11æ˜¯æœ‰SegmentCountæ®µï¼Œæ¯æ®µçš„8ä½ç”¨æ¥æè¿°æ®µçš„é•¿åº¦ï¼Œ3ä½ç”¨æ¥æè¿°åƒç´ ä½æ•°
 		int total_bits = 32 + SegmentCount * 11; 
 
 		for (int i = 0; i < SegmentCount; i++)
 		{
-			total_bits += segment[i] * segmentBit[i]; //ËãÉÏËùÓĞÏñËØÓĞ¶àÉÙÎ»
+			total_bits += segment[i] * segmentBit[i]; //ç®—ä¸Šæ‰€æœ‰åƒç´ æœ‰å¤šå°‘ä½
 		}
-		int total_bytes = total_bits % 8 == 0 ? total_bits / 8 : total_bits / 8 + 1; //ÏòÉÏÈ¡Õû¼ÆËã×Ö½ÚÊı
+		int total_bytes = total_bits % 8 == 0 ? total_bits / 8 : total_bits / 8 + 1; //å‘ä¸Šå–æ•´è®¡ç®—å­—èŠ‚æ•°
 		FILE* fout;
 
 		errno_t err = fopen_s(&fout, Savepath, "wb");
@@ -222,27 +221,27 @@ void LeeJiayi::Compression::DPCompress(const char* Filepath, const char* Savepat
 				fwrite(&colorMap, sizeof(RGB), 256, fout);
 			}
 			
-			//Ğ´ÈëÑ¹ËõºóµÄÊı¾İ
+			//å†™å…¥å‹ç¼©åçš„æ•°æ®
 			Writer w(fout, total_bytes);
 			w.Write(SegmentCount, imgData.size(), segment, segmentBit, imgData);
 			fclose(fout);
-			cout << "ÒÑÍê³É" << Savepath << "µÄĞ´Èë£¡" << endl;
+			cout << "å·²å®Œæˆ" << Savepath << "çš„å†™å…¥ï¼" << endl;
 		}
 		else {
-			cout << "ÎŞ·¨´ò¿ª½«ÒªĞ´ÈëµÄÎÄ¼ş£¡Çë¼ì²éÎÄ¼şÂ·¾¶£¡£¡" << endl;
+			cout << "æ— æ³•æ‰“å¼€å°†è¦å†™å…¥çš„æ–‡ä»¶ï¼è¯·æ£€æŸ¥æ–‡ä»¶è·¯å¾„ï¼ï¼" << endl;
 		}
 	}
 	else {
-		cout << "ÎŞ·¨´ò¿ªÍ¼ÏñÎÄ¼ş£¡Çë¼ì²éÎÄ¼şÂ·¾¶£¡£¡" << endl;
+		cout << "æ— æ³•æ‰“å¼€å›¾åƒæ–‡ä»¶ï¼è¯·æ£€æŸ¥æ–‡ä»¶è·¯å¾„ï¼ï¼" << endl;
 	}
 }
 
 /**
- * @brief DP½âÑ¹Ëõ¹ı³Ì
- * @param Filepath		ĞèÒª½âÑ¹ËõµÄÎÄ¼şÂ·¾¶
- * @param Savepath		½âÑ¹ËõºóÎÄ¼ş´æ´¢Â·¾¶
+ * @brief DPè§£å‹ç¼©è¿‡ç¨‹
+ * @param Filepath		éœ€è¦è§£å‹ç¼©çš„æ–‡ä»¶è·¯å¾„
+ * @param Savepath		è§£å‹ç¼©åæ–‡ä»¶å­˜å‚¨è·¯å¾„
  *
- * @return ¿Õ
+ * @return ç©º
  */
 void LeeJiayi::Compression::DPDecompress(const char* Filepath, const char* Savepath)
 {
@@ -252,7 +251,7 @@ void LeeJiayi::Compression::DPDecompress(const char* Filepath, const char* Savep
 	FILE* inFile;
 	errno_t err = fopen_s(&inFile, Filepath, "rb");
 	if (!err) {
-		cout << "¿ªÊ¼¶ÁÈ¡"<< Filepath<<"Êı¾İ" << endl;
+		cout << "å¼€å§‹è¯»å–"<< Filepath<<"æ•°æ®" << endl;
 		
 		fread(&fileHeader, sizeof(BitMapFileHeader), 1, inFile);
 		fread(&infoHeader, sizeof(BitMapInfoHeader), 1, inFile);
@@ -261,28 +260,28 @@ void LeeJiayi::Compression::DPDecompress(const char* Filepath, const char* Savep
 			fread(&colorMap, sizeof(RGB), 256, inFile);
 		}
 
-		int SegmentCount = 0; //¼ÇÂ¼ÓĞ¶àÉÙ¶Î
+		int SegmentCount = 0; //è®°å½•æœ‰å¤šå°‘æ®µ
 
-		fread(&SegmentCount, sizeof(int), 1, inFile); //¶ÁÈ¡ÓĞ¶àÉÙ¶Î
-		uint* SegmentBit = new uint[SegmentCount + 1];  //µÚi¶ÎÏñËØËùÕ¼Î»Êı
-		uint* SegmentLength = new uint[SegmentCount + 1];  //µÚi¶ÎÓĞ¼¸¸öÏñËØ
+		fread(&SegmentCount, sizeof(int), 1, inFile); //è¯»å–æœ‰å¤šå°‘æ®µ
+		uint* SegmentBit = new uint[SegmentCount + 1];  //ç¬¬iæ®µåƒç´ æ‰€å ä½æ•°
+		uint* SegmentLength = new uint[SegmentCount + 1];  //ç¬¬iæ®µæœ‰å‡ ä¸ªåƒç´ 
 
-		cout << "¿ªÊ¼»¹Ô­ĞÅÏ¢" << endl;
-		//»¹Ô­SegmentBit¡¢SegmentLengthĞÅÏ¢
-		int rest_bits = 0;//¼ÇÂ¼Ê£ÏÂµÄÎ»Êı
-		int section_num = SegmentCount * 11 % 8 == 0 ? SegmentCount * 11 / 8 : SegmentCount * 11 / 8 + 1;//ÏòÉÏÈ¡Õû
+		cout << "å¼€å§‹è¿˜åŸä¿¡æ¯" << endl;
+		//è¿˜åŸSegmentBitã€SegmentLengthä¿¡æ¯
+		int rest_bits = 0;//è®°å½•å‰©ä¸‹çš„ä½æ•°
+		int section_num = SegmentCount * 11 % 8 == 0 ? SegmentCount * 11 / 8 : SegmentCount * 11 / 8 + 1;//å‘ä¸Šå–æ•´
 		if (SegmentCount * 11 % 8 != 0) { rest_bits = 8 - (SegmentCount * 11 - SegmentCount * 11 / 8 * 8); }
 		uchar* datas = new uchar[section_num];
 		fread(datas, sizeof(char), section_num, inFile);
-		Recover r(SegmentCount, SegmentBit, SegmentLength, datas);//´´½¨»Ö¸´Àà
-		r.recoverBitInfo();//»Ö¸´·Ö¶ÎÎ»ÊıÓë·Ö¶Î¸öÊı
+		Recover r(SegmentCount, SegmentBit, SegmentLength, datas);//åˆ›å»ºæ¢å¤ç±»
+		r.recoverBitInfo();//æ¢å¤åˆ†æ®µä½æ•°ä¸åˆ†æ®µä¸ªæ•°
 		
-		int p_sum = 0;//¼ÆËãÃ¿Ò»¶ÎµÄ³¤¶È
+		int p_sum = 0;//è®¡ç®—æ¯ä¸€æ®µçš„é•¿åº¦
 		for (int i = 1; i <= SegmentCount; i++)
 		{
 			p_sum += SegmentLength[i];
 		}
-		//¼ÆËã×îÖÕµÄ×ÜÎ»ÊıÒÔ¼°×îºóµÄ×Ü×Ö½ÚÊı£¬ÓÃÓÚ»Ö¸´Ê¹ÓÃ
+		//è®¡ç®—æœ€ç»ˆçš„æ€»ä½æ•°ä»¥åŠæœ€åçš„æ€»å­—èŠ‚æ•°ï¼Œç”¨äºæ¢å¤ä½¿ç”¨
 		int pBit_sum = 0, qByte_sum = 0;
 		for (int i = 1; i <= SegmentCount; i++)
 		{
@@ -290,18 +289,18 @@ void LeeJiayi::Compression::DPDecompress(const char* Filepath, const char* Savep
 		}
 		qByte_sum = pBit_sum % 8 == 0 ? pBit_sum / 8 : pBit_sum / 8 + 1;
 
-		uchar* pBmpBuf = new uchar[p_sum]; //´æ´¢×îÖÕÏñËØÊı¾İ
-		uchar* pBmpDatas = new uchar[qByte_sum];//´æ´¢Î´½âÎöµÄÏñËØÊı¾İ
-		fread(pBmpDatas, sizeof(uchar), qByte_sum, inFile); //¶ÁÈ¡Êı¾İ
+		uchar* pBmpBuf = new uchar[p_sum]; //å­˜å‚¨æœ€ç»ˆåƒç´ æ•°æ®
+		uchar* pBmpDatas = new uchar[qByte_sum];//å­˜å‚¨æœªè§£æçš„åƒç´ æ•°æ®
+		fread(pBmpDatas, sizeof(uchar), qByte_sum, inFile); //è¯»å–æ•°æ®
 
-		//»Ö¸´×îÖÕµÄÏñËØÊı¾İ
+		//æ¢å¤æœ€ç»ˆçš„åƒç´ æ•°æ®
 		r.getPixel(pBmpBuf, pBmpDatas, datas[section_num - 1], rest_bits);
 		fclose(inFile);
 
 		FILE* fout;
 		err = fopen_s(&fout, Savepath, "wb");
 		if (!err) {
-			cout << "¿ªÊ¼Ğ´ÈëÍ¼ÏñÊı¾İ" << endl;
+			cout << "å¼€å§‹å†™å…¥å›¾åƒæ•°æ®" << endl;
 			fwrite(&fileHeader, sizeof(BitMapFileHeader), 1, fout);
 			fwrite(&infoHeader, sizeof(BitMapInfoHeader), 1, fout);
 
@@ -309,16 +308,16 @@ void LeeJiayi::Compression::DPDecompress(const char* Filepath, const char* Savep
 				fread(&colorMap, sizeof(RGB), 256, fout);
 			}
 
-			fwrite(pBmpBuf, p_sum, 1, fout); //Ğ´ÈëÏñËØĞÅÏ¢
+			fwrite(pBmpBuf, p_sum, 1, fout); //å†™å…¥åƒç´ ä¿¡æ¯
 			fclose(fout);
-			cout << "ÒÑÍê³É" << Savepath <<"µÄĞ´Èë£¡" << endl;
+			cout << "å·²å®Œæˆ" << Savepath <<"çš„å†™å…¥ï¼" << endl;
 		}
 		else {
-			cout << "ÎŞ·¨´ò¿ª½«ÒªĞ´ÈëµÄÎÄ¼ş£¡Çë¼ì²éÎÄ¼şÂ·¾¶£¡£¡" << endl;
+			cout << "æ— æ³•æ‰“å¼€å°†è¦å†™å…¥çš„æ–‡ä»¶ï¼è¯·æ£€æŸ¥æ–‡ä»¶è·¯å¾„ï¼ï¼" << endl;
 		}
 	}
 	else {
-		cout << "ÎŞ·¨´ò¿ª½«Òª½âÑ¹µÄÎÄ¼ş£¡Çë¼ì²éÎÄ¼şÂ·¾¶£¡£¡" << endl;
+		cout << "æ— æ³•æ‰“å¼€å°†è¦è§£å‹çš„æ–‡ä»¶ï¼è¯·æ£€æŸ¥æ–‡ä»¶è·¯å¾„ï¼ï¼" << endl;
 	}
 }
 
