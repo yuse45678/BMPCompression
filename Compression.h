@@ -1,10 +1,9 @@
-/**¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨[
-*×÷    Õß£ºLeeJiayi		                                               ¨U
-*µ¥	   Î»£ºSCUT£¬School of Automation Science and Engineering		   ¨U
-* CSDN£ºhttps://blog.csdn.net/weixin_47006220?type=blog				   ¨U
-*¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨g
+/**Â¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨[
+*Ã—Ã·    Ã•ÃŸÂ£ÂºLeeJiayi		                                               Â¨U
+* CSDNÂ£Âºhttps://blog.csdn.net/weixin_47006220?type=blog				   Â¨U
+*Â¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨g
 * Copyright LeeJiayi 2022. All rights reserved.
-*¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨a
+*Â¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨TÂ¨a
 *----------------------------------------------------------------------*/
 #pragma once
 #ifndef COMPRESSION_H
