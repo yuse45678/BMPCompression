@@ -1,18 +1,17 @@
-/**¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨[
-*×÷    Õß£ºLeeJiayi		                                               ¨U
-*µ¥	   Î»£ºSCUT£¬School of Automation Science and Engineering		   ¨U
-* CSDN£ºhttps://blog.csdn.net/weixin_47006220?type=blog				   ¨U
-*¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨g
+/**â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+*ä½œ    è€…ï¼šLeeJiayi		                                               â•‘
+* CSDNï¼šhttps://blog.csdn.net/weixin_47006220?type=blog				   â•‘
+*â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•£
 * Copyright LeeJiayi 2022. All rights reserved.
-*¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨a
+*â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 *----------------------------------------------------------------------*/
 #include "DPCompress.h"
 
 /**
- * @brief ±¾º¯ÊıÖ÷ÒªÊÇ·µ»Ø¶ÔÓ¦Êı¾İËùĞèÒªÊ¹ÓÃµÄ¶ş½øÖÆÎ»Êı
- * @param val			Êı¾İ
+ * @brief æœ¬å‡½æ•°ä¸»è¦æ˜¯è¿”å›å¯¹åº”æ•°æ®æ‰€éœ€è¦ä½¿ç”¨çš„äºŒè¿›åˆ¶ä½æ•°
+ * @param val			æ•°æ®
  *
- * @return count		·µ»ØËùĞèÒªÊ¹ÓÃµÄ¶ş½øÖÆÎ»Êı
+ * @return count		è¿”å›æ‰€éœ€è¦ä½¿ç”¨çš„äºŒè¿›åˆ¶ä½æ•°
  */
 int LeeJiayi::length(uchar val)
 {
@@ -28,78 +27,78 @@ int LeeJiayi::length(uchar val)
 }
 
 /**
- * @brief ±¾º¯ÊıÖ÷ÒªÊÇÓÃÓÚ¶ÔÊı¾İÎÄ¼ş½øĞĞ¶¯Ì¬·Ö¸îËã·¨£¬ÒÔÊµÏÖÑ¹Ëõ
- * @param fileSize		ÎÄ¼ş×Ü´óĞ¡
- * @param data			ÎÄ¼şÊı¾İµÄÖ¸Õë
- * @param segment		Ã¿Ò»¶Î×îÖÕµÄ·Ö¸î³¤¶È
- * @param segmentBit	×îÖÕ¸Ã¶ÎËùÊ¹ÓÃµÄÎ»Êı
+ * @brief æœ¬å‡½æ•°ä¸»è¦æ˜¯ç”¨äºå¯¹æ•°æ®æ–‡ä»¶è¿›è¡ŒåŠ¨æ€åˆ†å‰²ç®—æ³•ï¼Œä»¥å®ç°å‹ç¼©
+ * @param fileSize		æ–‡ä»¶æ€»å¤§å°
+ * @param data			æ–‡ä»¶æ•°æ®çš„æŒ‡é’ˆ
+ * @param segment		æ¯ä¸€æ®µæœ€ç»ˆçš„åˆ†å‰²é•¿åº¦
+ * @param segmentBit	æœ€ç»ˆè¯¥æ®µæ‰€ä½¿ç”¨çš„ä½æ•°
  *
- * @return SegmentCount	·µ»Ø·Ö¸î×Ü¶ÎÊı
+ * @return SegmentCount	è¿”å›åˆ†å‰²æ€»æ®µæ•°
  */
 int LeeJiayi::GetSegmentation(int fileSize, vector<uchar>& data, vector<int>& segment, vector<int>& segmentBit)
 {
-	//s:´æ´Ó1µ½i×îÉÙ´æ´¢Î»Êı
+	//s:å­˜ä»1åˆ°iæœ€å°‘å­˜å‚¨ä½æ•°
 	uint* s = (uint*)malloc(sizeof(uint) * (fileSize + 1));
-	// l[i]´æµÄµÄ´Ó1µ½iµÄĞòÁĞÖĞÄ³¸öÎ»ÖÃi-j+1¸ô¿ªµ½×îºóiÕâÒ»¶ÎµÄ×îÓÅ³¤¶Èl[i]
+	// l[i]å­˜çš„çš„ä»1åˆ°içš„åºåˆ—ä¸­æŸä¸ªä½ç½®i-j+1éš”å¼€åˆ°æœ€åiè¿™ä¸€æ®µçš„æœ€ä¼˜é•¿åº¦l[i]
 	uint* l = (uint*)malloc(sizeof(uint) * (fileSize + 1));
-	// b[i]Ó¦¸ÃÒª´æÏàÓ¦¶ÎµÄ×î´óÏñËØÎ»Êı£¬µ«Êµ¼Ê´æµÄÊÇÃ¿¸öÏñËØµÄËùÕ¼Î»Êı
+	// b[i]åº”è¯¥è¦å­˜ç›¸åº”æ®µçš„æœ€å¤§åƒç´ ä½æ•°ï¼Œä½†å®é™…å­˜çš„æ˜¯æ¯ä¸ªåƒç´ çš„æ‰€å ä½æ•°
 	uint* b = (uint*)malloc(sizeof(uint) * (fileSize + 1));
 
-	int Lmax = 255;  //ÏñËØĞòÁĞ×î´ó³¤¶È
-	int header = 11; //Ã¿Ò»¶ÎµÄÍ·²¿ĞÅÏ¢3£¨ÔªËØ×î¶àÓÃ8Î»¶ş½øÖÆÊı±íÊ¾£©+8£¨¶Î×î´ó³¤¶È255£©=11
+	int Lmax = 255;  //åƒç´ åºåˆ—æœ€å¤§é•¿åº¦
+	int header = 11; //æ¯ä¸€æ®µçš„å¤´éƒ¨ä¿¡æ¯3ï¼ˆå…ƒç´ æœ€å¤šç”¨8ä½äºŒè¿›åˆ¶æ•°è¡¨ç¤ºï¼‰+8ï¼ˆæ®µæœ€å¤§é•¿åº¦255ï¼‰=11
 	s[0] = 0;
-	cout << "¿ªÊ¼½øĞĞ¶¯Ì¬¹æ»®..." << endl;
-	cout << "¼ÆËã×îÓÅÖµÖĞ..." << endl;
+	cout << "å¼€å§‹è¿›è¡ŒåŠ¨æ€è§„åˆ’..." << endl;
+	cout << "è®¡ç®—æœ€ä¼˜å€¼ä¸­..." << endl;
 	for (int i = 1; i <= fileSize; i++) {
-		//¼ÆËãÏñËØµãpĞèÒªµÄ´æ´¢Î»Êı
+		//è®¡ç®—åƒç´ ç‚¹péœ€è¦çš„å­˜å‚¨ä½æ•°
 		b[i] = length(data[i - 1]);
-		int bMax = b[i];            //ºóÃæ¶ÎÖĞÔªËØËùÕ¼Î»Êı×î´óÖµ
-		s[i] = s[i - 1] + 1 * bMax; //Ö»ÓĞÒ»¸öÔªËØ£¬ËùÒÔ*1
+		int bMax = b[i];            //åé¢æ®µä¸­å…ƒç´ æ‰€å ä½æ•°æœ€å¤§å€¼
+		s[i] = s[i - 1] + 1 * bMax; //åªæœ‰ä¸€ä¸ªå…ƒç´ ï¼Œæ‰€ä»¥*1
 		l[i] = 1;
 
-		// jÎª×îºóÒ»¶ÎÖĞÔªËØ¸öÊı£¬jÈ¡iºÍ255ÖĞµÄ×îĞ¡Öµ
-		//¿É¿´×÷´ÓiÍùÇ°Öğ½¥À©´óiµ½i-1,iÔÙµ½i-2,i-1,i...
+		// jä¸ºæœ€åä¸€æ®µä¸­å…ƒç´ ä¸ªæ•°ï¼Œjå–iå’Œ255ä¸­çš„æœ€å°å€¼
+		//å¯çœ‹ä½œä»iå¾€å‰é€æ¸æ‰©å¤§iåˆ°i-1,iå†åˆ°i-2,i-1,i...
 		for (int j = 2; j <= i && j <= Lmax; j++) {
 
-			//ÔªËØÖğ½¥ÏòÇ°¸üĞÂ£¬¿ÉÄÜ»á³öÏÖ±ÈbMax¸ü´óµÄ£¬ĞèÒª¸üĞÂ
+			//å…ƒç´ é€æ¸å‘å‰æ›´æ–°ï¼Œå¯èƒ½ä¼šå‡ºç°æ¯”bMaxæ›´å¤§çš„ï¼Œéœ€è¦æ›´æ–°
 			if (bMax < b[i - j + 1]) {
 				bMax = b[i - j + 1];
 			}
 
-			//ÕÒµ½¸üºÃµÄ·Ö¶Î  jÎª¶ÎÖĞÔªËØ¸öÊı
+			//æ‰¾åˆ°æ›´å¥½çš„åˆ†æ®µ  jä¸ºæ®µä¸­å…ƒç´ ä¸ªæ•°
 			if (s[i] > s[i - j] + j * bMax) {
 				s[i] = s[i - j] + j * bMax;
 				l[i] = j;
 			}
 		}
 
-		//¼ÓÉÏÃ¿Ò»¶ÎµÄÍ·²¿ĞÅÏ¢3£¨ÔªËØ×î¶àÓÃ8Î»¶ş½øÖÆÊı±íÊ¾£©+8£¨¶Î×î´ó³¤¶È255£©
+		//åŠ ä¸Šæ¯ä¸€æ®µçš„å¤´éƒ¨ä¿¡æ¯3ï¼ˆå…ƒç´ æœ€å¤šç”¨8ä½äºŒè¿›åˆ¶æ•°è¡¨ç¤ºï¼‰+8ï¼ˆæ®µæœ€å¤§é•¿åº¦255ï¼‰
 		s[i] += header;
 	}
 
-	cout << "¿ªÊ¼×·×ÙÃ¿Ò»¶Î..." << endl;
-	int SegmentCount = 1; //ÕıÔÚ×·×ÙµÄ¶ÎÊı£¬´ÓºóÍùÇ°£¬×îºóÃæÊÇµÚÒ»¶Î
-	int* SegmentLength = (int*)malloc(sizeof(int) * (fileSize + 1));  //´æ»®·Ö¶ÎµÄµÄ³¤¶È
-	int* MaxBit = (int*)malloc(sizeof(int) * (fileSize + 1));    //´æ»®·Ö¶ÎÔªËØËùĞè×î´óÎ»Êı
+	cout << "å¼€å§‹è¿½è¸ªæ¯ä¸€æ®µ..." << endl;
+	int SegmentCount = 1; //æ­£åœ¨è¿½è¸ªçš„æ®µæ•°ï¼Œä»åå¾€å‰ï¼Œæœ€åé¢æ˜¯ç¬¬ä¸€æ®µ
+	int* SegmentLength = (int*)malloc(sizeof(int) * (fileSize + 1));  //å­˜åˆ’åˆ†æ®µçš„çš„é•¿åº¦
+	int* MaxBit = (int*)malloc(sizeof(int) * (fileSize + 1));    //å­˜åˆ’åˆ†æ®µå…ƒç´ æ‰€éœ€æœ€å¤§ä½æ•°
 	int n = fileSize;
 	while (n) {
-		SegmentLength[SegmentCount] = l[n];  //´ÓºóÍùÇ°×·×ÙµÄµÚj¶Î³¤¶È
-		MaxBit[SegmentCount] = b[n];  //´ÓºóÍùÇ°×·×ÙµÄµÚj¶ÎÔªËØ×î´óÎ»Êı
-		//±éÀúÃ¿Ò»¸ö¶ÎËùÓĞÔªËØ£¬È¡×î´óÖµ
+		SegmentLength[SegmentCount] = l[n];  //ä»åå¾€å‰è¿½è¸ªçš„ç¬¬jæ®µé•¿åº¦
+		MaxBit[SegmentCount] = b[n];  //ä»åå¾€å‰è¿½è¸ªçš„ç¬¬jæ®µå…ƒç´ æœ€å¤§ä½æ•°
+		//éå†æ¯ä¸€ä¸ªæ®µæ‰€æœ‰å…ƒç´ ï¼Œå–æœ€å¤§å€¼
 		for (int i = n - l[n] + 1; i <= n; i++) {
 			if (MaxBit[SegmentCount] < b[i]) {
 				MaxBit[SegmentCount] = b[i];
 			}
 		}
-		n = n - l[n]; // n¸üĞÂÎªµÚj¶ÎÖ®Ç°ĞòÁĞ³¤¶È
+		n = n - l[n]; // næ›´æ–°ä¸ºç¬¬jæ®µä¹‹å‰åºåˆ—é•¿åº¦
 		SegmentCount++;
 	}
 
 	//delete[] s, l, b;
-	cout << "ÒÑ»ñÈ¡×îÓÅ½â£¡¶ÔÓÚ¸ÃÍ¼Ïñ½«»®·ÖÎª" << SegmentCount - 1 << "¶Î" << endl;
+	cout << "å·²è·å–æœ€ä¼˜è§£ï¼å¯¹äºè¯¥å›¾åƒå°†åˆ’åˆ†ä¸º" << SegmentCount - 1 << "æ®µ" << endl;
 
 	for (int i = SegmentCount - 1; i >= 1; i--) {
-		//cout << "¶Î³¤¶È:" << SegmentLength[i] << ",ËùĞè´æ´¢Î»Êı£º" << MaxBit[i] << endl;
+		//cout << "æ®µé•¿åº¦:" << SegmentLength[i] << ",æ‰€éœ€å­˜å‚¨ä½æ•°ï¼š" << MaxBit[i] << endl;
 		segment.push_back(SegmentLength[i]);
 		segmentBit.push_back(MaxBit[i]);
 	}
@@ -113,7 +112,7 @@ int LeeJiayi::GetSegmentation(int fileSize, vector<uchar>& data, vector<int>& se
 	return SegmentCount - 1;
 }
 
-//³õÊ¼»¯Ğ´ÈëÀà£¬ÓÃÓÚĞ´ÈëÑ¹ËõºóµÄĞÅÏ¢
+//åˆå§‹åŒ–å†™å…¥ç±»ï¼Œç”¨äºå†™å…¥å‹ç¼©åçš„ä¿¡æ¯
 LeeJiayi::Writer::Writer(FILE* f, int n)
 {
 	datas = new char[n];
@@ -124,18 +123,18 @@ LeeJiayi::Writer::Writer(FILE* f, int n)
 	fout = f;
 }
 
-//´æ´¢ĞÅÏ¢£¬ÎªÖ®ºóÒ»´ÎĞÔĞ´Èë×ö×¼±¸
+//å­˜å‚¨ä¿¡æ¯ï¼Œä¸ºä¹‹åä¸€æ¬¡æ€§å†™å…¥åšå‡†å¤‡
 void LeeJiayi::Writer::store(uchar data, int bits)
 {
 	int rest_bits = 8 - pos;
 	if (rest_bits > bits) {
-		//²»ĞèÒªĞ´ÈëÏÂÒ»¸ö×Ö½Ú
+		//ä¸éœ€è¦å†™å…¥ä¸‹ä¸€ä¸ªå­—èŠ‚
 		data = data << (rest_bits - bits);
 		datas[index] = datas[index] | data;
 		pos += bits;
 	}
 	else {
-		//ĞèÒªÏÂÒ»¸ö×Ö½Ú
+		//éœ€è¦ä¸‹ä¸€ä¸ªå­—èŠ‚
 		datas[index] = datas[index] | (data >> (bits - rest_bits));
 		index++;
 		datas[index] = data << (8 - bits + rest_bits);
@@ -143,7 +142,7 @@ void LeeJiayi::Writer::store(uchar data, int bits)
 	}
 }
 
-//Ğ´ÈëÑ¹ËõºóµÄĞÅÏ¢
+//å†™å…¥å‹ç¼©åçš„ä¿¡æ¯
 void LeeJiayi::Writer::Write(int SegmentCount, int DataSize, vector<int>& segmentLength, vector<int>& segmentBit, vector<uchar>& data)
 {
 	fwrite(&SegmentCount, sizeof(int), 1, fout);
@@ -151,8 +150,8 @@ void LeeJiayi::Writer::Write(int SegmentCount, int DataSize, vector<int>& segmen
 	for (int i = 0; i < SegmentCount; i++)
 	{
 
-		store((unsigned char)segmentLength[i] - 1, 8); //°ËÎ»¶Î³¤
-		store((unsigned char)segmentBit[i] - 1, 3);//ÈıÎ»ÏñËØÎ»Êı
+		store((unsigned char)segmentLength[i] - 1, 8); //å…«ä½æ®µé•¿
+		store((unsigned char)segmentBit[i] - 1, 3);//ä¸‰ä½åƒç´ ä½æ•°
 	}
 	int pBit = segmentBit[0], cnt = 0, pLen = segmentLength[0];
 	for (int i = 0; i < DataSize; i++)
@@ -164,7 +163,7 @@ void LeeJiayi::Writer::Write(int SegmentCount, int DataSize, vector<int>& segmen
 	fwrite(datas, sizeof(char), size, fout);
 }
 
-//ÓÃÓÚ³õÊ¼»¯»Ö¸´Àà
+//ç”¨äºåˆå§‹åŒ–æ¢å¤ç±»
 LeeJiayi::Recover::Recover(int SegmentCount, uint* SegmentBit, uint* SegmentLength, uchar* Datas)
 {
 	m = SegmentCount;
@@ -173,11 +172,11 @@ LeeJiayi::Recover::Recover(int SegmentCount, uint* SegmentBit, uint* SegmentLeng
 	datas = Datas;
 }
 
-//»Ö¸´·Ö¶ÎĞÅÏ¢
+//æ¢å¤åˆ†æ®µä¿¡æ¯
 int LeeJiayi::Recover::recoverBitInfo()
 {
-	int section_num = m * 11 % 8 == 0 ? m * 11 / 8 : m * 11 / 8 + 1;//ÏòÉÏÈ¡Õû
-	unsigned int tmp_q = 0, tmp_b = 0; //´æ·ÅÁÙÊ±q¡¢bµÄÔªËØ
+	int section_num = m * 11 % 8 == 0 ? m * 11 / 8 : m * 11 / 8 + 1;//å‘ä¸Šå–æ•´
+	unsigned int tmp_q = 0, tmp_b = 0; //å­˜æ”¾ä¸´æ—¶qã€bçš„å…ƒç´ 
 	bool is_q = true;
 	int rest_bit_q = 8, rest_bit_b = 3, rest_bit_datas = 8, cnt = 1;
 	for (int i = 0; i < section_num; i++)
@@ -185,35 +184,35 @@ int LeeJiayi::Recover::recoverBitInfo()
 		rest_bit_datas = 8;
 		while (rest_bit_datas != 0)
 		{
-			if (is_q)   //Èç¹ûÏÖÔÚ×¼±¸¶Áq
+			if (is_q)   //å¦‚æœç°åœ¨å‡†å¤‡è¯»q
 			{
-				if (rest_bit_datas < rest_bit_q)//Èç¹ûÕâÒ»ÂÖ²»¹»
+				if (rest_bit_datas < rest_bit_q)//å¦‚æœè¿™ä¸€è½®ä¸å¤Ÿ
 				{
 					ReadData(tmp_q, rest_bit_q, rest_bit_datas, datas[i]);
-					rest_bit_q = rest_bit_q - rest_bit_datas; //¸üĞÂĞèÇóµÄÎ»Êı
-					rest_bit_datas = 0; //µ±Ç°8Î»±»¶ÁÍê
+					rest_bit_q = rest_bit_q - rest_bit_datas; //æ›´æ–°éœ€æ±‚çš„ä½æ•°
+					rest_bit_datas = 0; //å½“å‰8ä½è¢«è¯»å®Œ
 				}
-				else//Èç¹ûÕâÒ»ÂÖ¹»ÁË
+				else//å¦‚æœè¿™ä¸€è½®å¤Ÿäº†
 				{
 					unsigned char datas_i = datas[i] << (8 - rest_bit_datas);
 					datas_i = datas_i >> (rest_bit_datas - rest_bit_q);
 					tmp_q = tmp_q + datas_i;
-					rest_bit_datas -= rest_bit_q; //¸üĞÂÊ£ÓàÎ»Êı
-					rest_bit_q = 8; //¿ªÆôĞÂµÄÒ»ÂÖ
-					is_q = false; //×¼±¸¶Á3Î»µÄÏñËØÎ»
-					q[cnt] = tmp_q + 1; //Íê³ÉµÚcnt¸öÔªËØ
+					rest_bit_datas -= rest_bit_q; //æ›´æ–°å‰©ä½™ä½æ•°
+					rest_bit_q = 8; //å¼€å¯æ–°çš„ä¸€è½®
+					is_q = false; //å‡†å¤‡è¯»3ä½çš„åƒç´ ä½
+					q[cnt] = tmp_q + 1; //å®Œæˆç¬¬cntä¸ªå…ƒç´ 
 					tmp_q = 0;
 				}
 			}
-			else    //Èç¹ûÏÖÔÚ×¼±¸¶Áb
+			else    //å¦‚æœç°åœ¨å‡†å¤‡è¯»b
 			{
-				if (rest_bit_datas < rest_bit_b)//Èç¹ûÕâÒ»ÂÖ²»¹»
+				if (rest_bit_datas < rest_bit_b)//å¦‚æœè¿™ä¸€è½®ä¸å¤Ÿ
 				{
 					ReadData(tmp_b, rest_bit_b, rest_bit_datas, datas[i]);
-					rest_bit_b = rest_bit_b - rest_bit_datas; //¸üĞÂĞèÇóµÄÎ»Êı
-					rest_bit_datas = 0; //µ±Ç°8Î»±»¶ÁÍê
+					rest_bit_b = rest_bit_b - rest_bit_datas; //æ›´æ–°éœ€æ±‚çš„ä½æ•°
+					rest_bit_datas = 0; //å½“å‰8ä½è¢«è¯»å®Œ
 				}
-				else//Èç¹ûÕâÒ»ÂÖ¹»ÁË
+				else//å¦‚æœè¿™ä¸€è½®å¤Ÿäº†
 				{
 					//unsigned char c = datas[i] << (8 - rest_bit_datas);
 					//c = c >>  (rest_bit_datas - rest_bit_b);
@@ -221,20 +220,20 @@ int LeeJiayi::Recover::recoverBitInfo()
 					unsigned char datas_i = datas[i] << (8 - rest_bit_datas);
 					datas_i = datas_i >> (8 - rest_bit_b);
 					tmp_b = tmp_b + datas_i;
-					rest_bit_datas -= rest_bit_b; //¸üĞÂÊ£ÓàÎ»Êı
-					rest_bit_b = 3; //¿ªÆôĞÂµÄÒ»ÂÖ
-					is_q = true; //×¼±¸¶Á8Î»µÄ¶Î³¤
-					b[cnt] = tmp_b + 1; //Íê³ÉµÚcnt¸öÔªËØ
+					rest_bit_datas -= rest_bit_b; //æ›´æ–°å‰©ä½™ä½æ•°
+					rest_bit_b = 3; //å¼€å¯æ–°çš„ä¸€è½®
+					is_q = true; //å‡†å¤‡è¯»8ä½çš„æ®µé•¿
+					b[cnt] = tmp_b + 1; //å®Œæˆç¬¬cntä¸ªå…ƒç´ 
 					cnt++;
 					tmp_b = 0;
 				}
 			}
 		}
 	}
-	return rest_bit_datas; //·µ»Ø¿Õ³öÀ´¶àÉÙÎ»
+	return rest_bit_datas; //è¿”å›ç©ºå‡ºæ¥å¤šå°‘ä½
 }
 
-//¶ÁÈ¡Ñ¹ËõĞÅÏ¢ÖĞµÄÊı¾İ
+//è¯»å–å‹ç¼©ä¿¡æ¯ä¸­çš„æ•°æ®
 void LeeJiayi::Recover::ReadData(uint& tmp, int need, int give, uchar data)
 {
 	data = data << (8 - give);
@@ -243,62 +242,62 @@ void LeeJiayi::Recover::ReadData(uint& tmp, int need, int give, uchar data)
 	return;
 }
 
-//»Ö¸´Í¼ÏñÊı¾İ
+//æ¢å¤å›¾åƒæ•°æ®
 void LeeJiayi::Recover::getPixel(uchar* pBmpBuf, uchar* pDatas, uchar last, uint rest_bits)
 {
 	int cnt = 1, p_cnt = 0, tmp_need = 8, data_cnt = 0;
-	int over_ = 0; //¼ÇÂ¼Ò»×éÓĞ¶àÉÙÏñËØÎ´¶ÁÈ¡
+	int over_ = 0; //è®°å½•ä¸€ç»„æœ‰å¤šå°‘åƒç´ æœªè¯»å–
 	unsigned char tmp = 0;
 
-	//´¦Àí×îºóÒ»¸ö×Ö½ÚÖĞÊ£ÓàµÄÎ»
+	//å¤„ç†æœ€åä¸€ä¸ªå­—èŠ‚ä¸­å‰©ä½™çš„ä½
 	while (rest_bits > 0)
 	{
-		unsigned int group = q[cnt] * b[cnt];  //¼ÆËãÒ»¶ÎÏñËØµÄ×ÜÎ»Êı
+		unsigned int group = q[cnt] * b[cnt];  //è®¡ç®—ä¸€æ®µåƒç´ çš„æ€»ä½æ•°
 		if (group <= rest_bits)
-		{//Èç¹ûÕâÒ»¶Î×ÜÎ»Êı²»³¬¹ırest_bits
+		{//å¦‚æœè¿™ä¸€æ®µæ€»ä½æ•°ä¸è¶…è¿‡rest_bits
 			for (unsigned int i = 0; i < q[cnt]; i++)
 			{
 				pBmpBuf[p_cnt++] = get_hex(rest_bits - i * b[cnt], b[cnt], last);
 			}
-			rest_bits -= group; //rest_bits¼õÉÙgroupÎ»
-			cnt++; //½øÈëÏÂÒ»×é
+			rest_bits -= group; //rest_bitså‡å°‘groupä½
+			cnt++; //è¿›å…¥ä¸‹ä¸€ç»„
 		}
 		else
-		{//Èç¹ûÕâÒ»×é×ÜÎ»Êı¿çÔ½rest_bits
+		{//å¦‚æœè¿™ä¸€ç»„æ€»ä½æ•°è·¨è¶Šrest_bits
 			while (rest_bits >= b[cnt])
-			{//°ÑÃ»¿çÔ½µÄ²¿·Ö¶ÁÍê
+			{//æŠŠæ²¡è·¨è¶Šçš„éƒ¨åˆ†è¯»å®Œ
 				pBmpBuf[p_cnt++] = get_hex(rest_bits, b[cnt], last);
 				rest_bits -= b[cnt];
 				over_++;
 			}
 			over_ = q[cnt] - over_;
 			if (rest_bits != 0)
-			{//Èç¹ûÏñËØÎ»¿çÔ½rest_bits
+			{//å¦‚æœåƒç´ ä½è·¨è¶Šrest_bits
 				tmp = get_hex(rest_bits, rest_bits, last);
 				tmp = tmp << (b[cnt] - rest_bits);
 				tmp_need = b[cnt];
-				tmp_need -= rest_bits; //¸ÃÏñËØÎ»»¹ĞèÒªtmp_needÎ»À´Ìî³äÒ»¸öÏñËØÖµ
-				rest_bits = 0; //Ê£ÓàÎ»ÊıÖÃ0
+				tmp_need -= rest_bits; //è¯¥åƒç´ ä½è¿˜éœ€è¦tmp_needä½æ¥å¡«å……ä¸€ä¸ªåƒç´ å€¼
+				rest_bits = 0; //å‰©ä½™ä½æ•°ç½®0
 			}
 		}
 	}
 	if (over_ == 0)
 	{
-		cnt++; //ÇĞ»»ÏÂÒ»×é
-		over_ = q[cnt]; //¸üĞÂÎ´¶ÁµÄÏñËØÊıÁ¿
+		cnt++; //åˆ‡æ¢ä¸‹ä¸€ç»„
+		over_ = q[cnt]; //æ›´æ–°æœªè¯»çš„åƒç´ æ•°é‡
 	}
-	//¿ªÊ¼¶ÔpData½øĞĞ´¦Àí
-	rest_bits = 8; //¼ÇÂ¼´ı½âÎöµÄ8Î»»¹Ê£¶àÉÙ
+	//å¼€å§‹å¯¹pDataè¿›è¡Œå¤„ç†
+	rest_bits = 8; //è®°å½•å¾…è§£æçš„8ä½è¿˜å‰©å¤šå°‘
 	while (cnt <= m)
 	{
 		while (rest_bits >= tmp_need)
-		{//Ê£ÓàÎ»ÊıÂú×ãµ±Ç°Î»ÊıĞèÒª
+		{//å‰©ä½™ä½æ•°æ»¡è¶³å½“å‰ä½æ•°éœ€è¦
 			tmp += get_hex(rest_bits, tmp_need, pDatas[data_cnt]);
 			pBmpBuf[p_cnt++] = tmp;
 
-			tmp = 0; //½«tmpÖÃ0
+			tmp = 0; //å°†tmpç½®0
 			rest_bits -= tmp_need;
-			over_--; //¸Ã×éÎ´¶ÁµÄÏñËØÁ¿-1
+			over_--; //è¯¥ç»„æœªè¯»çš„åƒç´ é‡-1
 			if (over_ == 0)
 			{
 				if (cnt == m)
@@ -306,30 +305,30 @@ void LeeJiayi::Recover::getPixel(uchar* pBmpBuf, uchar* pDatas, uchar last, uint
 					cnt++;
 					break;
 				}
-				cnt++; //ÇĞ»»ÏÂÒ»×é
-				over_ = q[cnt]; //¸üĞÂÎ´¶ÁµÄÏñËØÊıÁ¿
+				cnt++; //åˆ‡æ¢ä¸‹ä¸€ç»„
+				over_ = q[cnt]; //æ›´æ–°æœªè¯»çš„åƒç´ æ•°é‡
 			}
-			tmp_need = b[cnt];  //¸üĞÂĞèÒªµÄÏñËØÁ¿
+			tmp_need = b[cnt];  //æ›´æ–°éœ€è¦çš„åƒç´ é‡
 		}
 		if (rest_bits != 0)
-		{//Èç¹ûÁôÁËÒ»²¿·ÖÃ»ÓĞ¶ÁÍê£¬Í¬Ê±Ò²²»¹»
+		{//å¦‚æœç•™äº†ä¸€éƒ¨åˆ†æ²¡æœ‰è¯»å®Œï¼ŒåŒæ—¶ä¹Ÿä¸å¤Ÿ
 			tmp = get_hex(rest_bits, rest_bits, pDatas[data_cnt]);
 			tmp = tmp << (b[cnt] - rest_bits);
-			tmp_need -= rest_bits; //¸ÃÏñËØÎ»»¹ĞèÒªtmp_needÎ»À´Ìî³äÒ»¸öÏñËØÖµ
-			rest_bits = 8; //Ê£ÓàÎ»ÊıÖÃ8
+			tmp_need -= rest_bits; //è¯¥åƒç´ ä½è¿˜éœ€è¦tmp_needä½æ¥å¡«å……ä¸€ä¸ªåƒç´ å€¼
+			rest_bits = 8; //å‰©ä½™ä½æ•°ç½®8
 		}
-		rest_bits = 8; //½øÈëÏÂÒ»¸ö8Î»
-		data_cnt++; //¶ÁÈ¡ÏÂÒ»¸ö×Ö½Ú
+		rest_bits = 8; //è¿›å…¥ä¸‹ä¸€ä¸ª8ä½
+		data_cnt++; //è¯»å–ä¸‹ä¸€ä¸ªå­—èŠ‚
 	}
 }
 
 /**
- * @brief »ñµÃ´ÓµÚstartÎ»¿ªÊ¼£¬¹²bitsÎ»µÄÊ®½øÖÆ
- * @param start			¿ªÊ¼Î»
- * @param bits			×îÖÕÎ»
- * @param ch			ĞèÒª×ª»»µÄÊı¾İ
+ * @brief è·å¾—ä»ç¬¬startä½å¼€å§‹ï¼Œå…±bitsä½çš„åè¿›åˆ¶
+ * @param start			å¼€å§‹ä½
+ * @param bits			æœ€ç»ˆä½
+ * @param ch			éœ€è¦è½¬æ¢çš„æ•°æ®
  *
- * @return ch	·µ»Ø¶ÔÓ¦×Ö·ûµÄÊ®½øÖÆ
+ * @return ch	è¿”å›å¯¹åº”å­—ç¬¦çš„åè¿›åˆ¶
  */
 uchar LeeJiayi::Recover::get_hex(int start, int bits, uchar ch)
 {
