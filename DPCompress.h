@@ -1,10 +1,9 @@
-/**¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨[
-*×÷    Õß£ºLeeJiayi		                                               ¨U
-*µ¥	   Î»£ºSCUT£¬School of Automation Science and Engineering		   ¨U
-* CSDN£ºhttps://blog.csdn.net/weixin_47006220?type=blog				   ¨U
-*¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨g
+/**â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+*ä½œ    è€…ï¼šLeeJiayi		                                               â•‘
+* CSDNï¼šhttps://blog.csdn.net/weixin_47006220?type=blog				   â•‘
+*â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•£
 * Copyright LeeJiayi 2022. All rights reserved.
-*¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨a
+*â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 *----------------------------------------------------------------------*/
 #pragma once
 #include"BMPInfo.h"
@@ -19,10 +18,10 @@ namespace LeeJiayi {
 	{
 	private:
 		FILE* fout;
-		int size;//Ğ´ÈëµÄ×Ö½Ú×ÜÊı
-		char* datas;//Êı¾İ
-		int index;//µ±Ç°Ğ´Èëµ½µÄ×Ö½ÚÎ»ÖÃ
-		int pos;//µ±Ç°Ğ´Èëµ½µÄ×Ö½ÚµÄÎ»Î»ÖÃ
+		int size;//å†™å…¥çš„å­—èŠ‚æ€»æ•°
+		char* datas;//æ•°æ®
+		int index;//å½“å‰å†™å…¥åˆ°çš„å­—èŠ‚ä½ç½®
+		int pos;//å½“å‰å†™å…¥åˆ°çš„å­—èŠ‚çš„ä½ä½ç½®
 	public:
 		Writer(FILE* f, int n);
 		void store(uchar data, int bits);
