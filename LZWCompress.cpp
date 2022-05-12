@@ -1,33 +1,32 @@
-/**¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨[
-*×÷    Õß£ºLeeJiayi		                                               ¨U
-*µ¥	   Î»£ºSCUT£¬School of Automation Science and Engineering		   ¨U
-* CSDN£ºhttps://blog.csdn.net/weixin_47006220?type=blog				   ¨U
-*¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨g
+/**â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+*ä½œ    è€…ï¼šLeeJiayi		                                               â•‘
+* CSDNï¼šhttps://blog.csdn.net/weixin_47006220?type=blog				   â•‘
+*â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•£
 * Copyright LeeJiayi 2022. All rights reserved.
-*¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨a
+*â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 *----------------------------------------------------------------------*/
 #include "LZWCompress.h"
 
 /**
- * @brief ½«µ¥¸ö×Ö·û×ªÎª16½øÖÆ×Ö·û´®
- * @param ch			ĞèÒª×ª»»µÄÊı¾İ
+ * @brief å°†å•ä¸ªå­—ç¬¦è½¬ä¸º16è¿›åˆ¶å­—ç¬¦ä¸²
+ * @param ch			éœ€è¦è½¬æ¢çš„æ•°æ®
  *
- * @return ch	·µ»Ø¶ÔÓ¦×Ö·ûµÄ16½øÖÆ×Ö·û´®
+ * @return ch	è¿”å›å¯¹åº”å­—ç¬¦çš„16è¿›åˆ¶å­—ç¬¦ä¸²
  */
 string Char2Hex(uchar c) {
 	const std::string hex = "0123456789ABCDEF";
 	string ret;
-	ret.push_back(hex[(c >> 4) & 0xf]); //È¡¶ş½øÖÆ¸ßËÄÎ»
-	ret.push_back(hex[c & 0xf]);        //È¡¶ş½øÖÆµÍËÄÎ»
+	ret.push_back(hex[(c >> 4) & 0xf]); //å–äºŒè¿›åˆ¶é«˜å››ä½
+	ret.push_back(hex[c & 0xf]);        //å–äºŒè¿›åˆ¶ä½å››ä½
 	return ret;
 }
 
 /**
- * @brief				ÓÃÓÚ·Ö¸î×Ö·û´®
- * @param str			ĞèÒª·Ö¸îµÄ×Ö·û´®
- * @param pattern		ÒÔÊ²Ã´·ûºÅÀ´×÷Îª·Ö¸îÒÀ¾İ	
+ * @brief				ç”¨äºåˆ†å‰²å­—ç¬¦ä¸²
+ * @param str			éœ€è¦åˆ†å‰²çš„å­—ç¬¦ä¸²
+ * @param pattern		ä»¥ä»€ä¹ˆç¬¦å·æ¥ä½œä¸ºåˆ†å‰²ä¾æ®	
  *
- * @return resVec		·µ»Ø·Ö¸îºóµÄ×Ö·û´®
+ * @return resVec		è¿”å›åˆ†å‰²åçš„å­—ç¬¦ä¸²
  */
 std::vector<std::string> splitStr(const std::string& str, const std::string& pattern)
 {
@@ -37,7 +36,7 @@ std::vector<std::string> splitStr(const std::string& str, const std::string& pat
 	{
 		return resVec;
 	}
-	//·½±ã½ØÈ¡×îºóÒ»¶ÎÊı¾İ
+	//æ–¹ä¾¿æˆªå–æœ€åä¸€æ®µæ•°æ®
 	std::string strs = str + pattern;
 
 	size_t pos = strs.find(pattern);
@@ -55,10 +54,10 @@ std::vector<std::string> splitStr(const std::string& str, const std::string& pat
 }
 
 /**
- * @brief				Bitset¸ñÊ½×ª×Ö·û¸ñÊ½
- * @param bits			ĞèÒª×ª»»µÄ×Ö·û
+ * @brief				Bitsetæ ¼å¼è½¬å­—ç¬¦æ ¼å¼
+ * @param bits			éœ€è¦è½¬æ¢çš„å­—ç¬¦
  *
- * @return char			·µ»Ø×ª»»ºóµÄ×Ö·û
+ * @return char			è¿”å›è½¬æ¢åçš„å­—ç¬¦
  */
 char bitset2char(std::bitset<8> bits)
 {
@@ -66,10 +65,10 @@ char bitset2char(std::bitset<8> bits)
 }
 
 /**
- * @brief				uint¸ñÊ½×ªvector<uchar>¸ñÊ½
- * @param  data			ĞèÒª×ª»»µÄdata
+ * @brief				uintæ ¼å¼è½¬vector<uchar>æ ¼å¼
+ * @param  data			éœ€è¦è½¬æ¢çš„data
  *
- * @return buf			·µ»Ø×ª»»ºóµÄvector<uchar>
+ * @return buf			è¿”å›è½¬æ¢åçš„vector<uchar>
  */
 std::vector<uchar> Int2CharVector(uint data) {
 	std::vector<uchar> buf;
@@ -88,7 +87,11 @@ LZWcompress::LZWcompress(vector<uchar> data, int size) {
 	}
 }
 
-//±àÂë³õÊ¼»¯
+LZWcompress::LZWcompress() {
+	
+}
+
+//ç¼–ç åˆå§‹åŒ–
 void LZWcompress::encode_init() {
 	for (int i = 0; i < 256; i++) {
 		encode_map.insert(std::pair<string, uint>(std::to_string(i), i));
@@ -96,14 +99,14 @@ void LZWcompress::encode_init() {
 
 }
 
-//½âÂë³õÊ¼»¯
+//è§£ç åˆå§‹åŒ–
 void LZWcompress::decode_init() {
 	for (int i = 0; i < 256; i++) {
 		decode_map.insert(std::pair<uint, string>(i, std::to_string(i)));
 	}
 }
 
-//LZW±àÂë¹ı³Ì
+//LZWç¼–ç è¿‡ç¨‹
 void LZWcompress::LZW_encode() {
 	encode_init();
 	uint symbol = 256;
@@ -118,11 +121,11 @@ void LZWcompress::LZW_encode() {
 		}
 		//cout<<"previous_:"<<previous_char<<"\tcurrent:"<<current_char<<"\tp_and_c"<<p_and_c<<endl;
 		if (encode_map.find(p_and_c) != encode_map.end()) {
-			//p_and_cÔÚ×ÖµäÀï
+			//p_and_cåœ¨å­—å…¸é‡Œ
 			previous_char = p_and_c;
 		}
 		else {
-			//p_and_c²»ÔÚ×ÖµäÀï
+			//p_and_cä¸åœ¨å­—å…¸é‡Œ
 			lzw_encode_output.push_back(encode_map[previous_char]);
 			encode_map.insert(pair<string, uint>(p_and_c, symbol));
 			symbol += 1;
@@ -136,7 +139,7 @@ void LZWcompress::LZW_encode() {
 
 }
 
-//LZW½âÂë
+//LZWè§£ç 
 void LZWcompress::LZW_decode() {
 	decode_init();
 	uint symbol = 256;
@@ -153,7 +156,7 @@ void LZWcompress::LZW_decode() {
 	for (auto iter = (lzw_encode_output.begin() + 1); iter != lzw_encode_output.end(); iter++) {
 		current_symbol = *iter;
 		if (decode_map.find(current_symbol) != decode_map.end()) {
-			//symbolÔÚ×ÖµäÖĞ
+			//symbolåœ¨å­—å…¸ä¸­
 			auto decode_vector = splitStr(decode_map[current_symbol], "-");
 			for (auto iter = decode_vector.begin(); iter != decode_vector.end(); iter++)
 				lzw_decode_output.push_back(*iter);
@@ -168,7 +171,7 @@ void LZWcompress::LZW_decode() {
 
 		}
 		else {
-			//symbol²»ÔÚ×ÖµäÖĞ
+			//symbolä¸åœ¨å­—å…¸ä¸­
 			previous_char = decode_map[previous_symbol];
 
 			current_char = splitStr(decode_map[previous_symbol], "-")[0];
@@ -189,13 +192,13 @@ void LZWcompress::LZW_decode() {
 }
 
 
-//»ñÈ¡±àÂëÊı¾İ£¬²¢·µ»Ø±àÂëÊı¾İ£¨lzw_encode_data£©¼°ÆäÊı¾İ´óĞ¡£¨datasize£©
+//è·å–ç¼–ç æ•°æ®ï¼Œå¹¶è¿”å›ç¼–ç æ•°æ®ï¼ˆlzw_encode_dataï¼‰åŠå…¶æ•°æ®å¤§å°ï¼ˆdatasizeï¼‰
 uchar* LZWcompress::get_lzw_encode(int& datasize) {
 
 	uchar* lzw_encode_data = new uchar[lzw_encode_output.size() * 4 + 4];
 	datasize = lzw_encode_output.size() * 4 + 4;
 	int k = 0;
-	//±£´ælzwÑ¹ËõÎÄ¼ş´óĞ¡
+	//ä¿å­˜lzwå‹ç¼©æ–‡ä»¶å¤§å°
 	for (int i = 0; i < 4; i++) {
 		std::vector<uchar> char_vector = Int2CharVector(get_encode_size());
 		lzw_encode_data[k++] = char_vector[i];
@@ -211,7 +214,7 @@ uchar* LZWcompress::get_lzw_encode(int& datasize) {
 
 
 
-//»ñÈ¡½âÂëÊı¾İ£¬²¢·µ»Ø½âÂëÊı¾İ£¨lzw_decode_data£©¼°ÆäÊı¾İ´óĞ¡£¨datasize£©
+//è·å–è§£ç æ•°æ®ï¼Œå¹¶è¿”å›è§£ç æ•°æ®ï¼ˆlzw_decode_dataï¼‰åŠå…¶æ•°æ®å¤§å°ï¼ˆdatasizeï¼‰
 uchar* LZWcompress::get_lzw_decode(int& datasize) {
 	datasize = lzw_decode_output.size();
 	uchar* lzw_decode_data = new uchar[lzw_decode_output.size()];
@@ -222,17 +225,17 @@ uchar* LZWcompress::get_lzw_decode(int& datasize) {
 	return lzw_decode_data;
 }
 
-//»ñÈ¡±àÂëÊä³ö´óĞ¡
+//è·å–ç¼–ç è¾“å‡ºå¤§å°
 uint LZWcompress::get_encode_size() {
 	return lzw_encode_output.size() * 4;
 }
 
-//»ñÈ¡½âÂëÊä³ö´óĞ¡
+//è·å–è§£ç è¾“å‡ºå¤§å°
 uint LZWcompress::get_decode_size() {
 	return lzw_decode_output.size();
 }
 
-//ÉèÖÃ±àÂëÊı¾İ£¬×¼±¸½âÂë
+//è®¾ç½®ç¼–ç æ•°æ®ï¼Œå‡†å¤‡è§£ç 
 void LZWcompress::set_encode_data(uchar* lzw_encode_data, uint encode_size) {
 	for (int i = 0; i < encode_size; i += 4) {
 		string str = "";
